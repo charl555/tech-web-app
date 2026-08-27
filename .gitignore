@@ -27,3 +27,6 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+DATABASEPLAN.md
+DASHBOARD_ACCESS_FIX.md
+PUBLIC_LOGIN_REGISTER_CHANGES.md

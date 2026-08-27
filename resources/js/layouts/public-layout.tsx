@@ -1,4 +1,4 @@
-import { Link, usePage } from '@inertiajs/react';
+import { Form, Link, usePage } from '@inertiajs/react';
 import { ShoppingCart, Search, User, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
@@ -17,6 +17,14 @@ import {
     SheetTitle,
     SheetTrigger,
 } from '@/components/ui/sheet';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 import type { BreadcrumbItem } from '@/types';
 
@@ -91,13 +99,34 @@ export default function PublicLayout({ breadcrumbs = [], children }: PublicLayou
                         </Link>
 
                         {auth.user ? (
-                            <Link href="/dashboard">
-                                <Button variant="ghost" size="icon">
-                                    <User className="h-5 w-5" />
-                                </Button>
-                            </Link>
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <Button variant="ghost" size="icon">
+                                        <User className="h-5 w-5" />
+                                    </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end">
+                                    <DropdownMenuLabel>
+                                        {auth.user.name || 'Account'}
+                                    </DropdownMenuLabel>
+                                    <DropdownMenuItem>
+                                        <Form
+                                            action="/account/logout"
+                                            method="post"
+                                            className="w-full"
+                                        >
+                                            <button
+                                                type="submit"
+                                                className="w-full text-left"
+                                            >
+                                                Log out
+                                            </button>
+                                        </Form>
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
                         ) : (
-                            <Link href="/login">
+                            <Link href="/account/login">
                                 <Button variant="ghost" size="sm" className="hidden sm:flex">
                                     Sign in
                                 </Button>
@@ -136,7 +165,7 @@ export default function PublicLayout({ breadcrumbs = [], children }: PublicLayou
                                                 <Button className="w-full">Dashboard</Button>
                                             </Link>
                                         ) : (
-                                            <Link href="/login" onClick={() => setMobileOpen(false)}>
+                                            <Link href="/account/login" onClick={() => setMobileOpen(false)}>
                                                 <Button className="w-full">Sign in</Button>
                                             </Link>
                                         )}
