@@ -3,8 +3,13 @@ import { ArrowRight, Cpu, HardDrive, Monitor, Zap, Truck, Shield, Headphones } f
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import type { Product } from '@/types';
 
-export default function Home() {
+interface HomeProps {
+    featuredProducts: Product[];
+}
+
+export default function Home({ featuredProducts }: HomeProps) {
     return (
         <>
             <Head title="TechParts - Premium Computer Parts" />
@@ -109,25 +114,39 @@ export default function Home() {
                             </Button>
                         </Link>
                     </div>
-                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                        {[1, 2, 3, 4].map((item) => (
-                            <Card key={item} className="overflow-hidden transition-shadow hover:shadow-lg">
-                                <div className="aspect-square bg-neutral-100 dark:bg-neutral-800" />
-                                <CardHeader className="p-4">
-                                    <CardTitle className="line-clamp-1 text-base">Product Name {item}</CardTitle>
-                                    <CardDescription className="line-clamp-2 text-sm">
-                                        High-performance component for gaming and productivity.
-                                    </CardDescription>
-                                </CardHeader>
-                                <CardContent className="p-4 pt-0">
-                                    <div className="flex items-center justify-between">
-                                        <span className="text-lg font-bold">${(item * 99 + 49).toFixed(2)}</span>
-                                        <Badge variant="secondary">New</Badge>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        ))}
-                    </div>
+                    {featuredProducts.length === 0 ? (
+                        <div className="rounded-lg border border-dashed py-12 text-center dark:border-neutral-800">
+                            <p className="text-neutral-600 dark:text-neutral-400">No featured products available right now.</p>
+                            <Link href="/products">
+                                <Button className="mt-4" variant="outline">Browse All Products</Button>
+                            </Link>
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                            {featuredProducts.map((product) => (
+                                <Card key={product.id} className="overflow-hidden transition-shadow hover:shadow-lg">
+                                    <div className="aspect-square bg-neutral-100 dark:bg-neutral-800" />
+                                    <CardHeader className="p-4">
+                                        <div className="flex items-start justify-between gap-2">
+                                            <CardTitle className="line-clamp-1 text-base">{product.name}</CardTitle>
+                                            <Badge variant="secondary" className="shrink-0">
+                                                {product.is_featured ? 'Featured' : 'New'}
+                                            </Badge>
+                                        </div>
+                                        <CardDescription className="line-clamp-2 text-sm">
+                                            {product.short_description ?? product.description}
+                                        </CardDescription>
+                                    </CardHeader>
+                                    <CardContent className="p-4 pt-0">
+                                        <div className="flex items-center justify-between">
+                                            <span className="text-lg font-bold">${Number(product.sale_price ?? product.price).toFixed(2)}</span>
+                                            <Button size="sm">Add to Cart</Button>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </section>
 

@@ -1,18 +1,32 @@
 <?php
 
+use App\Http\Controllers\Public\BrandController;
+use App\Http\Controllers\Public\CartController;
+use App\Http\Controllers\Public\CategoryController;
+use App\Http\Controllers\Public\HomeController;
+use App\Http\Controllers\Public\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
-Route::inertia('/', 'public/home')->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::inertia('/products', 'public/products')->name('products');
-Route::inertia('/products/{id}', 'public/product-detail')->name('products.show');
-Route::inertia('/categories', 'public/categories')->name('categories');
-Route::inertia('/brands', 'public/brands')->name('brands');
-Route::inertia('/cart', 'public/cart')->name('cart');
-Route::inertia('/about', 'public/about')->name('about');
-Route::inertia('/contact', 'public/contact')->name('contact');
+Route::get('/products', [ProductController::class, 'index'])->name('products');
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+Route::get('/brands', [BrandController::class, 'index'])->name('brands');
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+Route::get('/about', function () {
+    return Inertia::render('public/about');
+})->name('about');
+Route::get('/contact', function () {
+    return Inertia::render('public/contact');
+})->name('contact');
 
 Route::inertia('/account/login', 'public/login')->name('customer.login');
 Route::post('/account/login', function (Request $request) {
