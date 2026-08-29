@@ -10,12 +10,14 @@ import type { Product } from '@/types';
 
 interface ProductOverviewProps {
     product: Product;
+    isWishlisted?: boolean;
 }
 
-export default function ProductOverview({ product }: ProductOverviewProps) {
+export default function ProductOverview({ product, isWishlisted = false }: ProductOverviewProps) {
     const [selectedImage, setSelectedImage] = useState(0);
     const [quantity, setQuantity] = useState(1);
     const [addedToCart, setAddedToCart] = useState(false);
+    const [wishlisted, setWishlisted] = useState(isWishlisted);
 
     const addToCart = () => {
         setAddedToCart(true);
@@ -164,10 +166,19 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
                                                 {addedToCart ? 'Added!' : 'Add to Cart'}
                                             </Button>
                                         </Form>
-                                        <Button size="lg" variant="outline" className="gap-2">
-                                            <Heart className="h-5 w-5" />
-                                            Wishlist
-                                        </Button>
+                                        <Form action="/wishlist/toggle" method="post" className="flex-1">
+                                            <input type="hidden" name="product_id" value={product.id} />
+                                            <Button
+                                                size="lg"
+                                                variant={wishlisted ? 'default' : 'outline'}
+                                                className={`w-full gap-2 ${wishlisted ? 'bg-red-50 text-red-600 hover:bg-red-100 dark:bg-red-950 dark:text-red-400 dark:hover:bg-red-900' : ''}`}
+                                                type="submit"
+                                                onClick={() => setWishlisted(!wishlisted)}
+                                            >
+                                                <Heart className={`h-5 w-5 ${wishlisted ? 'fill-red-500 text-red-500' : ''}`} />
+                                                {wishlisted ? 'Wishlisted' : 'Wishlist'}
+                                            </Button>
+                                        </Form>
                                     </div>
 
                                     <div className="flex items-center gap-4">

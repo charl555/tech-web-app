@@ -41,8 +41,16 @@ class ProductController extends Controller
             ->with(['brand', 'category', 'images', 'reviews'])
             ->findOrFail($id);
 
+        $isWishlisted = false;
+        if (auth()->check()) {
+            $isWishlisted = \App\Models\WishlistItem::where('user_id', auth()->id())
+                ->where('product_id', $product->id)
+                ->exists();
+        }
+
         return Inertia::render('public/product-overview', [
             'product' => $product,
+            'isWishlisted' => $isWishlisted,
         ]);
     }
 }

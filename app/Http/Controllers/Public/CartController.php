@@ -53,7 +53,9 @@ class CartController extends Controller
         ];
         $request->session()->put('cart', $cart);
 
-        return back()->with('status', 'Product added to cart.');
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Product added to cart.']);
+
+        return back();
     }
 
     public function remove(Request $request)
@@ -66,7 +68,9 @@ class CartController extends Controller
         unset($cart[$request->product_id]);
         $request->session()->put('cart', $cart);
 
-        return back()->with('status', 'Item removed from cart.');
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Item removed from cart.']);
+
+        return back();
     }
 
     public function update(Request $request)
@@ -89,13 +93,17 @@ class CartController extends Controller
         ];
         $request->session()->put('cart', $cart);
 
-        return back()->with('status', 'Cart updated.');
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Cart updated.']);
+
+        return back();
     }
 
     public function clear(Request $request)
     {
         $request->session()->forget('cart');
 
-        return back()->with('status', 'Cart cleared.');
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Cart cleared.']);
+
+        return back();
     }
 }

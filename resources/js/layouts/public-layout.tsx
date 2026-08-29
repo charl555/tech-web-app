@@ -94,7 +94,9 @@ export default function PublicLayout({ breadcrumbs = [], children }: PublicLayou
                         <Link href="/cart">
                             <Button variant="ghost" size="icon" className="relative">
                                 <ShoppingCart className="h-5 w-5" />
-                                <Badge className="absolute -right-1 -top-1 h-5 w-5 rounded-full p-0 text-xs">0</Badge>
+                                {Number(usePage().props.cartCount ?? 0) > 0 && (
+                                    <Badge className="absolute -right-1 -top-1 h-5 w-5 rounded-full p-0 text-xs">{Number(usePage().props.cartCount ?? 0)}</Badge>
+                                )}
                             </Button>
                         </Link>
 
@@ -109,6 +111,12 @@ export default function PublicLayout({ breadcrumbs = [], children }: PublicLayou
                                     <DropdownMenuLabel>
                                         {auth.user.name || 'Account'}
                                     </DropdownMenuLabel>
+                                    <DropdownMenuItem>
+                                        <Link href="/account" className="w-full">
+                                            Account
+                                        </Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuSeparator />
                                     <DropdownMenuItem>
                                         <Form
                                             action="/account/logout"
@@ -161,8 +169,8 @@ export default function PublicLayout({ breadcrumbs = [], children }: PublicLayou
                                     ))}
                                     <div className="mt-4 border-t pt-4 dark:border-neutral-800">
                                         {auth.user ? (
-                                            <Link href="/dashboard" onClick={() => setMobileOpen(false)}>
-                                                <Button className="w-full">Dashboard</Button>
+                                            <Link href="/account" onClick={() => setMobileOpen(false)}>
+                                                <Button className="w-full">My Account</Button>
                                             </Link>
                                         ) : (
                                             <Link href="/account/login" onClick={() => setMobileOpen(false)}>

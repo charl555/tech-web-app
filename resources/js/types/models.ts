@@ -35,3 +35,23 @@ export interface Product {
     brand?: Brand;
     category?: Category;
 }
+
+export interface Order {
+    id: number;
+    order_number: string;
+    status: string;
+    total_amount: number;
+    payment_status: string;
+    created_at: string;
+}
+
+export interface WishlistItem {
+    id: number;
+    product: {
+        id: number;
+        name: string;
+        price: number;
+        sale_price?: number;
+        is_active: boolean;
+    };
+}

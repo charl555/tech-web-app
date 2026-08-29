@@ -4,7 +4,9 @@ use App\Http\Controllers\Public\BrandController;
 use App\Http\Controllers\Public\CartController;
 use App\Http\Controllers\Public\CategoryController;
 use App\Http\Controllers\Public\HomeController;
+use App\Http\Controllers\Public\PasswordController;
 use App\Http\Controllers\Public\ProductController;
+use App\Http\Controllers\Public\WishlistController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -77,8 +79,13 @@ Route::post('/account/register', function (Request $request) {
     return redirect('/');
 });
 
-Route::middleware(['auth', 'verified', 'admin'])->group(function () {
-    Route::inertia('dashboard', 'dashboard')->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/account', [App\Http\Controllers\Public\AccountController::class, 'index'])->name('account');
+    Route::post('/account/password', [App\Http\Controllers\Public\PasswordController::class, 'update'])->name('account.password');
+    Route::post('/wishlist/toggle', [App\Http\Controllers\Public\WishlistController::class, 'toggle'])->name('wishlist.toggle');
+    Route::middleware(['admin'])->group(function () {
+        Route::inertia('dashboard', 'dashboard')->name('dashboard');
+    });
 });
 
 require __DIR__ . '/settings.php';
