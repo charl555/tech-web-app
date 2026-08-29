@@ -124,26 +124,28 @@ export default function Home({ featuredProducts }: HomeProps) {
                     ) : (
                         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                             {featuredProducts.map((product) => (
-                                <Card key={product.id} className="overflow-hidden transition-shadow hover:shadow-lg">
-                                    <div className="aspect-square bg-neutral-100 dark:bg-neutral-800" />
-                                    <CardHeader className="p-4">
-                                        <div className="flex items-start justify-between gap-2">
-                                            <CardTitle className="line-clamp-1 text-base">{product.name}</CardTitle>
-                                            <Badge variant="secondary" className="shrink-0">
-                                                {product.is_featured ? 'Featured' : 'New'}
-                                            </Badge>
-                                        </div>
-                                        <CardDescription className="line-clamp-2 text-sm">
-                                            {product.short_description ?? product.description}
-                                        </CardDescription>
-                                    </CardHeader>
-                                    <CardContent className="p-4 pt-0">
-                                        <div className="flex items-center justify-between">
-                                            <span className="text-lg font-bold">${Number(product.sale_price ?? product.price).toFixed(2)}</span>
-                                            <Button size="sm">Add to Cart</Button>
-                                        </div>
-                                    </CardContent>
-                                </Card>
+                                <Link key={product.id} href={`/products/${product.id}/overview`}>
+                                    <Card className="overflow-hidden transition-shadow hover:shadow-lg cursor-pointer">
+                                        <div className="aspect-square bg-neutral-100 dark:bg-neutral-800" />
+                                        <CardHeader className="p-4">
+                                            <div className="flex items-start justify-between gap-2">
+                                                <CardTitle className="line-clamp-1 text-base">{product.name}</CardTitle>
+                                                <Badge variant="secondary" className="shrink-0">
+                                                    {product.is_featured ? 'Featured' : 'New'}
+                                                </Badge>
+                                            </div>
+                                            <CardDescription className="line-clamp-2 text-sm">
+                                                {product.short_description ?? product.description}
+                                            </CardDescription>
+                                        </CardHeader>
+                                        <CardContent className="p-4 pt-0">
+                                            <div className="flex items-center justify-between">
+                                                <span className="text-lg font-bold">${Number(product.sale_price ?? product.price).toFixed(2)}</span>
+                                                <Button size="sm">Add to Cart</Button>
+                                            </div>
+                                        </CardContent>
+                                    </Card>
+                                </Link>
                             ))}
                         </div>
                     )}

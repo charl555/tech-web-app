@@ -34,4 +34,15 @@ class ProductController extends Controller
             'product' => $product,
         ]);
     }
+
+    public function overview($id)
+    {
+        $product = Product::where('is_active', true)
+            ->with(['brand', 'category', 'images', 'reviews'])
+            ->findOrFail($id);
+
+        return Inertia::render('public/product-overview', [
+            'product' => $product,
+        ]);
+    }
 }

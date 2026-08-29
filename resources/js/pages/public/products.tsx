@@ -245,72 +245,76 @@ export default function Products({ products, categories, brands }: ProductsProps
                         ) : view === 'grid' ? (
                             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
                                 {paginatedProducts.map((product) => (
-                                    <Card key={product.id} className="overflow-hidden transition-shadow hover:shadow-lg">
-                                        <div className="aspect-square bg-neutral-100 dark:bg-neutral-800" />
-                                        <CardHeader className="p-4">
-                                            <div className="flex items-start justify-between gap-2">
-                                                <CardTitle className="line-clamp-1 text-base">{product.name}</CardTitle>
-                                                <Badge variant="secondary" className="shrink-0">
-                                                    {product.is_featured ? 'Featured' : 'New'}
-                                                </Badge>
-                                            </div>
-                                            <CardDescription className="line-clamp-2 text-sm">
-                                                {product.short_description ?? product.description}
-                                            </CardDescription>
-                                        </CardHeader>
-                                        <CardFooter className="flex items-center justify-between p-4 pt-0">
-                                            <div className="flex flex-col">
-                                                <span className="text-lg font-bold">${(Number(product.sale_price ?? product.price)).toFixed(2)}</span>
-                                                {product.quantity === 0 && (
-                                                    <span className="text-sm text-neutral-500">Out of stock</span>
-                                                )}
-                                            </div>
-                                            <Form action="/cart/add" method="post">
-                                                <input type="hidden" name="product_id" value={product.id} />
-                                                <input type="hidden" name="quantity" value="1" />
-                                                <Button size="sm" type="submit" disabled={product.quantity === 0}>
-                                                    {product.quantity === 0 ? 'Unavailable' : 'Add to Cart'}
-                                                </Button>
-                                            </Form>
-                                        </CardFooter>
-                                    </Card>
+                                    <Link key={product.id} href={`/products/${product.id}/overview`}>
+                                        <Card className="overflow-hidden transition-shadow hover:shadow-lg cursor-pointer">
+                                            <div className="aspect-square bg-neutral-100 dark:bg-neutral-800" />
+                                            <CardHeader className="p-4">
+                                                <div className="flex items-start justify-between gap-2">
+                                                    <CardTitle className="line-clamp-1 text-base">{product.name}</CardTitle>
+                                                    <Badge variant="secondary" className="shrink-0">
+                                                        {product.is_featured ? 'Featured' : 'New'}
+                                                    </Badge>
+                                                </div>
+                                                <CardDescription className="line-clamp-2 text-sm">
+                                                    {product.short_description ?? product.description}
+                                                </CardDescription>
+                                            </CardHeader>
+                                            <CardFooter className="flex items-center justify-between p-4 pt-0">
+                                                <div className="flex flex-col">
+                                                    <span className="text-lg font-bold">${(Number(product.sale_price ?? product.price)).toFixed(2)}</span>
+                                                    {product.quantity === 0 && (
+                                                        <span className="text-sm text-neutral-500">Out of stock</span>
+                                                    )}
+                                                </div>
+                                                <Form action="/cart/add" method="post" onClick={(e) => e.stopPropagation()}>
+                                                    <input type="hidden" name="product_id" value={product.id} />
+                                                    <input type="hidden" name="quantity" value="1" />
+                                                    <Button size="sm" type="submit" disabled={product.quantity === 0}>
+                                                        {product.quantity === 0 ? 'Unavailable' : 'Add to Cart'}
+                                                    </Button>
+                                                </Form>
+                                            </CardFooter>
+                                        </Card>
+                                    </Link>
                                 ))}
                             </div>
                         ) : (
                             <div className="space-y-4">
                                 {paginatedProducts.map((product) => (
-                                    <Card key={product.id} className="overflow-hidden transition-shadow hover:shadow-lg">
-                                        <CardContent className="p-4">
-                                            <div className="flex gap-4">
-                                                <div className="h-32 w-32 shrink-0 bg-neutral-100 dark:bg-neutral-800" />
-                                                <div className="flex flex-1 flex-col justify-between">
-                                                    <div>
-                                                        <div className="flex items-start justify-between gap-4">
-                                                            <div>
-                                                                <CardTitle className="text-base">{product.name}</CardTitle>
-                                                                <CardDescription className="line-clamp-2 text-sm">
-                                                                    {product.short_description ?? product.description}
-                                                                </CardDescription>
+                                    <Link key={product.id} href={`/products/${product.id}/overview`}>
+                                        <Card className="overflow-hidden transition-shadow hover:shadow-lg cursor-pointer">
+                                            <CardContent className="p-4">
+                                                <div className="flex gap-4">
+                                                    <div className="h-32 w-32 shrink-0 bg-neutral-100 dark:bg-neutral-800" />
+                                                    <div className="flex flex-1 flex-col justify-between">
+                                                        <div>
+                                                            <div className="flex items-start justify-between gap-4">
+                                                                <div>
+                                                                    <CardTitle className="text-base">{product.name}</CardTitle>
+                                                                    <CardDescription className="line-clamp-2 text-sm">
+                                                                        {product.short_description ?? product.description}
+                                                                    </CardDescription>
+                                                                </div>
+                                                                <Badge variant="secondary" className="shrink-0">
+                                                                    {product.is_featured ? 'Featured' : 'New'}
+                                                                </Badge>
                                                             </div>
-                                                            <Badge variant="secondary" className="shrink-0">
-                                                                {product.is_featured ? 'Featured' : 'New'}
-                                                            </Badge>
+                                                        </div>
+                                                        <div className="mt-3 flex items-center justify-between">
+                                                            <span className="text-lg font-bold">${(Number(product.sale_price ?? product.price)).toFixed(2)}</span>
+                                                            <Form action="/cart/add" method="post" onClick={(e) => e.stopPropagation()}>
+                                                                <input type="hidden" name="product_id" value={product.id} />
+                                                                <input type="hidden" name="quantity" value="1" />
+                                                                <Button size="sm" type="submit" disabled={product.quantity === 0}>
+                                                                    {product.quantity === 0 ? 'Unavailable' : 'Add to Cart'}
+                                                                </Button>
+                                                            </Form>
                                                         </div>
                                                     </div>
-                                                    <div className="mt-3 flex items-center justify-between">
-                                                        <span className="text-lg font-bold">${(Number(product.sale_price ?? product.price)).toFixed(2)}</span>
-                                                        <Form action="/cart/add" method="post">
-                                                            <input type="hidden" name="product_id" value={product.id} />
-                                                            <input type="hidden" name="quantity" value="1" />
-                                                            <Button size="sm" type="submit" disabled={product.quantity === 0}>
-                                                                {product.quantity === 0 ? 'Unavailable' : 'Add to Cart'}
-                                                            </Button>
-                                                        </Form>
-                                                    </div>
                                                 </div>
-                                            </div>
-                                        </CardContent>
-                                    </Card>
+                                            </CardContent>
+                                        </Card>
+                                    </Link>
                                 ))}
                             </div>
                         )}

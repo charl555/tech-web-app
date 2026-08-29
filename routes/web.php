@@ -14,6 +14,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/products/{id}/overview', [ProductController::class, 'overview'])->name('products.overview');
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 Route::get('/brands', [BrandController::class, 'index'])->name('brands');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
