@@ -4,6 +4,8 @@ export interface Category {
     slug: string;
     description?: string;
     image?: string;
+    sort_order?: number;
+    is_active: boolean;
 }
 
 export interface Brand {
