@@ -2,7 +2,7 @@ import { Head, Link } from '@inertiajs/react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { ArrowUpRight, Package, ShoppingBag, Users, DollarSign, AlertTriangle } from 'lucide-react';
+import { ArrowUpRight, Package, ShoppingBag, Users, DollarSign, AlertTriangle, Tag, ShoppingCart, TicketPercent, BarChart3, FileText, Settings } from 'lucide-react';
 import { dashboard } from '@/routes';
 
 interface DashboardProps {
@@ -143,6 +143,49 @@ export default function Dashboard({ stats, recentOrders, recentCustomers }: Dash
                         </CardContent>
                     </Card>
                 </div>
+
+                {/* Quick Actions */}
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Quick Actions</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-8">
+                            <Link href="/admin/products/create" className="flex flex-col items-center gap-2 rounded-lg border p-4 hover:bg-muted">
+                                <Package className="h-6 w-6" />
+                                <span className="text-xs font-medium">Add Product</span>
+                            </Link>
+                            <Link href="/admin/categories/create" className="flex flex-col items-center gap-2 rounded-lg border p-4 hover:bg-muted">
+                                <Tag className="h-6 w-6" />
+                                <span className="text-xs font-medium">Add Category</span>
+                            </Link>
+                            <Link href="/admin/brands/create" className="flex flex-col items-center gap-2 rounded-lg border p-4 hover:bg-muted">
+                                <ShoppingBag className="h-6 w-6" />
+                                <span className="text-xs font-medium">Add Brand</span>
+                            </Link>
+                            <Link href="/admin/coupons/create" className="flex flex-col items-center gap-2 rounded-lg border p-4 hover:bg-muted">
+                                <TicketPercent className="h-6 w-6" />
+                                <span className="text-xs font-medium">Add Coupon</span>
+                            </Link>
+                            <Link href="/admin/orders" className="flex flex-col items-center gap-2 rounded-lg border p-4 hover:bg-muted">
+                                <ShoppingCart className="h-6 w-6" />
+                                <span className="text-xs font-medium">Orders</span>
+                            </Link>
+                            <Link href="/admin/customers" className="flex flex-col items-center gap-2 rounded-lg border p-4 hover:bg-muted">
+                                <Users className="h-6 w-6" />
+                                <span className="text-xs font-medium">Customers</span>
+                            </Link>
+                            <Link href="/admin/reports" className="flex flex-col items-center gap-2 rounded-lg border p-4 hover:bg-muted">
+                                <BarChart3 className="h-6 w-6" />
+                                <span className="text-xs font-medium">Reports</span>
+                            </Link>
+                            <Link href="/admin/settings" className="flex flex-col items-center gap-2 rounded-lg border p-4 hover:bg-muted">
+                                <Settings className="h-6 w-6" />
+                                <span className="text-xs font-medium">Settings</span>
+                            </Link>
+                        </div>
+                    </CardContent>
+                </Card>
             </div>
         </>
     );
