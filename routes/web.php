@@ -1,9 +1,15 @@
 <?php
 
+use App\Http\Controllers\Admin\ActivityLogController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Public\BrandController;
+use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Public\CartController;
 use App\Http\Controllers\Public\CategoryController as PublicCategoryController;
 use App\Http\Controllers\Public\HomeController;
@@ -11,8 +17,8 @@ use App\Http\Controllers\Public\PasswordController;
 use App\Http\Controllers\Public\ProductController as PublicProductController;
 use App\Http\Controllers\Public\WishlistController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -90,6 +96,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('admin/products', ProductController::class)->names('admin.products');
         Route::resource('admin/categories', CategoryController::class)->names('admin.categories');
+        Route::resource('admin/brands', BrandController::class)->names('admin.brands');
+        Route::resource('admin/coupons', CouponController::class)->names('admin.coupons');
+        Route::get('admin/orders', [OrderController::class, 'index'])->name('admin.orders.index');
+        Route::get('admin/orders/{id}', [OrderController::class, 'show'])->name('admin.orders.show');
+        Route::post('admin/orders/{id}/status', [OrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
+        Route::post('admin/orders/{id}/payment', [OrderController::class, 'updatePaymentStatus'])->name('admin.orders.updatePaymentStatus');
+        Route::get('admin/customers', [CustomerController::class, 'index'])->name('admin.customers.index');
+        Route::get('admin/customers/{id}', [CustomerController::class, 'show'])->name('admin.customers.show');
+        Route::get('admin/activity-logs', [ActivityLogController::class, 'index'])->name('admin.activity-logs.index');
+        Route::get('admin/reports', [ReportController::class, 'index'])->name('admin.reports.index');
+        Route::get('admin/settings', [SettingsController::class, 'index'])->name('admin.settings.index');
+        Route::post('admin/settings', [SettingsController::class, 'update'])->name('admin.settings.update');
     });
 });
 

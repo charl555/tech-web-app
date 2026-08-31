@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { BookOpen, FolderGit2, LayoutGrid, Package, Tag } from 'lucide-react';
+import { BookOpen, FolderGit2, LayoutGrid, Package, Tag, ShoppingBag, ShoppingCart, Users, TicketPercent, BarChart3, FileText, Settings } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -31,6 +31,41 @@ const mainNavItems: NavItem[] = [
         title: 'Categories',
         href: '/admin/categories',
         icon: Tag,
+    },
+    {
+        title: 'Brands',
+        href: '/admin/brands',
+        icon: ShoppingBag,
+    },
+    {
+        title: 'Orders',
+        href: '/admin/orders',
+        icon: ShoppingCart,
+    },
+    {
+        title: 'Customers',
+        href: '/admin/customers',
+        icon: Users,
+    },
+    {
+        title: 'Coupons',
+        href: '/admin/coupons',
+        icon: TicketPercent,
+    },
+    {
+        title: 'Reports',
+        href: '/admin/reports',
+        icon: BarChart3,
+    },
+    {
+        title: 'Activity Logs',
+        href: '/admin/activity-logs',
+        icon: FileText,
+    },
+    {
+        title: 'Settings',
+        href: '/admin/settings',
+        icon: Settings,
     },
 ];
 
