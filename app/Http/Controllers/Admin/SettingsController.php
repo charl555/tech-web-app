@@ -11,7 +11,7 @@ class SettingsController extends Controller
     public function index()
     {
         $settings = [
-            'store_name' => config('app.name', 'TechParts'),
+            'store_name' => config('app.name', 'PCForge'),
             'contact_email' => '',
             'phone' => '',
             'address' => '',
@@ -20,7 +20,7 @@ class SettingsController extends Controller
             'free_shipping_threshold' => 50,
             'stripe_enabled' => false,
             'paypal_enabled' => false,
-            'email_from_name' => config('app.name', 'TechParts'),
+            'email_from_name' => config('app.name', 'PCForge'),
             'email_from_address' => '',
         ];
 

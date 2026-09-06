@@ -34,7 +34,7 @@ export default function Categories({ categories }: CategoriesProps) {
 
     return (
         <>
-            <Head title="Categories - TechParts" />
+            <Head title="Categories - PCForge" />
 
             <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8">
                 <div className="mb-8">

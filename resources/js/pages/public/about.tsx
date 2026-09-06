@@ -6,12 +6,12 @@ import { Truck, Shield, Headphones, Award } from 'lucide-react';
 export default function About() {
     return (
         <>
-            <Head title="About Us - TechParts" />
+            <Head title="About Us - PCForge" />
 
             <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8">
                 <div className="mb-12 text-center">
                     <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
-                        About TechParts
+                        About PCForge
                     </h1>
                     <p className="mx-auto mt-4 max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
                         We are passionate about providing the highest quality computer components
@@ -65,7 +65,7 @@ export default function About() {
                         </CardHeader>
                         <CardContent className="space-y-4 text-neutral-600 dark:text-neutral-400">
                             <p>
-                                Founded in 2020, TechParts started with a simple mission: to make
+                                Founded in 2020, PCForge started with a simple mission: to make
                                 premium computer components accessible to everyone. What began as a small
                                 online store has grown into a trusted destination for PC enthusiasts.
                             </p>

@@ -77,7 +77,7 @@ export default function Products({ products, categories, brands }: ProductsProps
 
     return (
         <>
-            <Head title="Products - TechParts" />
+            <Head title="Products - PCForge" />
 
             <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8">
                 <div className="mb-6">

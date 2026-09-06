@@ -55,7 +55,7 @@ export default function PublicLayout({ breadcrumbs = [], children }: PublicLayou
                             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900">
                                 <ShoppingCart className="h-5 w-5" />
                             </div>
-                            <span className="text-lg font-bold tracking-tight">TechParts</span>
+                            <span className="text-lg font-bold tracking-tight">PCForge</span>
                         </Link>
 
                         <nav className="hidden lg:flex">
@@ -153,7 +153,7 @@ export default function PublicLayout({ breadcrumbs = [], children }: PublicLayou
                                         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900">
                                             <ShoppingCart className="h-5 w-5" />
                                         </div>
-                                        TechParts
+                                        PCForge
                                     </SheetTitle>
                                 </SheetHeader>
                                 <nav className="mt-6 flex flex-col gap-2">
@@ -195,7 +195,7 @@ export default function PublicLayout({ breadcrumbs = [], children }: PublicLayou
                                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900">
                                     <ShoppingCart className="h-5 w-5" />
                                 </div>
-                                <span className="text-lg font-bold">TechParts</span>
+                                <span className="text-lg font-bold">PCForge</span>
                             </Link>
                             <p className="mt-4 text-sm text-neutral-600 dark:text-neutral-400">
                                 Your one-stop shop for premium computer parts and components.
@@ -243,7 +243,7 @@ export default function PublicLayout({ breadcrumbs = [], children }: PublicLayou
                     </div>
 
                     <div className="mt-12 border-t pt-8 text-center text-sm text-neutral-500 dark:border-neutral-800">
-                        © {new Date().getFullYear()} TechParts. All rights reserved.
+                        © {new Date().getFullYear()} PCForge. All rights reserved.
                     </div>
                 </div>
             </footer>

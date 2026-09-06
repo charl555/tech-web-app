@@ -11,7 +11,7 @@ import { ShoppingCart } from 'lucide-react';
 export default function Register({ passwordRules = '' }: { passwordRules?: string }) {
     return (
         <>
-            <Head title="Create Account - TechParts" />
+            <Head title="Create Account - PCForge" />
             <div className="mx-auto max-w-md px-4 py-8">
                 <div className="mb-8 text-center">
                     <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900">
@@ -21,7 +21,7 @@ export default function Register({ passwordRules = '' }: { passwordRules?: strin
                         Create Your Account
                     </h1>
                     <p className="mt-2 text-neutral-600 dark:text-neutral-400">
-                        Join TechParts and start building your dream PC today.
+                        Join PCForge and start building your dream PC today.
                     </p>
                 </div>
 

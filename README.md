@@ -1,10 +1,10 @@
-# TechParts
+# PCForge
 
 A full-featured ecommerce platform built with Laravel 13, React 19, Inertia.js, and shadcn/ui. It includes a customer-facing storefront and a complete admin panel for managing products, orders, customers, coupons, and analytics.
 
-## What is TechParts
+## What is PCForge
 
-TechParts is a tech parts ecommerce system. Customers can browse products, manage a cart, toggle wishlist items, and place orders. Admins can manage the product catalog, view and update orders, manage customers and coupons, and review reports and activity logs.
+PCForge is a tech parts ecommerce system. Customers can browse products, manage a cart, toggle wishlist items, and place orders. Admins can manage the product catalog, view and update orders, manage customers and coupons, and review reports and activity logs.
 
 ## How It Works
 

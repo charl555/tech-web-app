@@ -8,7 +8,7 @@ import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 export default function Contact() {
     return (
         <>
-            <Head title="Contact Us - TechParts" />
+            <Head title="Contact Us - PCForge" />
 
             <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8">
                 <div className="mb-12 text-center">
@@ -74,7 +74,7 @@ export default function Contact() {
                                     <Mail className="mt-0.5 h-5 w-5 shrink-0 text-neutral-600 dark:text-neutral-400" />
                                     <div>
                                         <p className="text-sm font-medium">Email</p>
-                                        <p className="text-sm text-neutral-600 dark:text-neutral-400">support@techparts.com</p>
+                                        <p className="text-sm text-neutral-600 dark:text-neutral-400">support@PCForge.com</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-3">

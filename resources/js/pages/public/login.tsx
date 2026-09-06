@@ -12,7 +12,7 @@ import { ShoppingCart } from 'lucide-react';
 export default function Login({ status, canResetPassword = true }: { status?: string; canResetPassword?: boolean }) {
     return (
         <>
-            <Head title="Sign In - TechParts" />
+            <Head title="Sign In - PCForge" />
             <div className="mx-auto max-w-md px-4 py-8">
                 <div className="mb-8 text-center">
                     <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900">

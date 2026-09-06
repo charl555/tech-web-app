@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Public\BrandController as PublicBrandController;
 use App\Http\Controllers\Public\CartController;
 use App\Http\Controllers\Public\CategoryController as PublicCategoryController;
 use App\Http\Controllers\Public\HomeController;
@@ -27,7 +28,7 @@ Route::get('/products', [PublicProductController::class, 'index'])->name('produc
 Route::get('/products/{id}', [PublicProductController::class, 'show'])->name('products.show');
 Route::get('/products/{id}/overview', [PublicProductController::class, 'overview'])->name('products.overview');
 Route::get('/categories', [PublicCategoryController::class, 'index'])->name('categories');
-Route::get('/brands', [BrandController::class, 'index'])->name('brands');
+Route::get('/brands', [PublicBrandController::class, 'index'])->name('brands');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');

@@ -12,7 +12,7 @@ interface HomeProps {
 export default function Home({ featuredProducts }: HomeProps) {
     return (
         <>
-            <Head title="TechParts - Premium Computer Parts" />
+            <Head title="PCForge - Premium Computer Parts" />
 
             {/* Hero Section */}
             <section className="relative overflow-hidden bg-neutral-50 dark:bg-neutral-900">

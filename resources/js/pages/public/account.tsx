@@ -37,7 +37,7 @@ export default function Account({ user, orders, wishlistItems }: AccountProps) {
 
     return (
         <>
-            <Head title="My Account - TechParts" />
+            <Head title="My Account - PCForge" />
 
             <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8">
                 <div className="mb-8">

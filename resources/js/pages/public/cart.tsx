@@ -33,7 +33,7 @@ export default function Cart({ cartItems }: CartProps) {
 
     return (
         <>
-            <Head title="Shopping Cart - TechParts" />
+            <Head title="Shopping Cart - PCForge" />
 
             <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8">
                 <div className="mb-6">

@@ -31,7 +31,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
     return (
         <>
-            <Head title={`${product.name} - TechParts`} />
+            <Head title={`${product.name} - PCForge`} />
 
             <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8">
                 <Link

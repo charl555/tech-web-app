@@ -24,7 +24,7 @@ export default function Brands({ brands }: BrandsProps) {
 
     return (
         <>
-            <Head title="Brands - TechParts" />
+            <Head title="Brands - PCForge" />
 
             <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8">
                 <div className="mb-8">
