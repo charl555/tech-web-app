@@ -1,7 +1,9 @@
-import { Head, Link, usePage } from '@inertiajs/react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useState } from 'react';
+import { Head } from '@inertiajs/react';
+import { Plus, Search } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import {
     Select,
@@ -10,18 +12,15 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
-import { Plus, Search } from 'lucide-react';
-import { useState } from 'react';
 import type { Product, Category, Brand } from '@/types';
 
 interface ProductsIndexProps {
     products: Product[];
     categories: Category[];
     brands: Brand[];
-    flash?: { success?: string };
 }
 
-export default function ProductsIndex({ products, categories, brands, flash }: ProductsIndexProps) {
+export default function ProductsIndex({ products, categories, brands }: ProductsIndexProps) {
     const [search, setSearch] = useState('');
     const [categoryFilter, setCategoryFilter] = useState<string>('all');
     const [brandFilter, setBrandFilter] = useState<string>('all');
@@ -31,6 +30,7 @@ export default function ProductsIndex({ products, categories, brands, flash }: P
             product.sku.toLowerCase().includes(search.toLowerCase());
         const matchesCategory = categoryFilter === 'all' || String(product.category_id) === categoryFilter;
         const matchesBrand = brandFilter === 'all' || String(product.brand_id) === brandFilter;
+
         return matchesSearch && matchesCategory && matchesBrand;
     });
 

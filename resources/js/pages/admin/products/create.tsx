@@ -1,6 +1,10 @@
+import { useState } from 'react';
 import { Head, Link, useForm } from '@inertiajs/react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { ArrowLeft } from 'lucide-react';
+import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
@@ -10,10 +14,6 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
-import { Checkbox } from '@/components/ui/checkbox';
-import { ArrowLeft } from 'lucide-react';
-import InputError from '@/components/input-error';
-import { useState } from 'react';
 import type { Category, Brand } from '@/types';
 
 interface ProductCreateProps {
@@ -27,7 +27,7 @@ export default function ProductCreate({ categories, brands }: ProductCreateProps
     const [isFeatured, setIsFeatured] = useState(false);
     const [isActive, setIsActive] = useState(true);
 
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
         name: '',
         sku: '',
         slug: '',

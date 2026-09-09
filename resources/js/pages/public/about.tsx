@@ -1,7 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
+import { Truck, Shield, Headphones, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Truck, Shield, Headphones, Award } from 'lucide-react';
 
 export default function About() {
     return (

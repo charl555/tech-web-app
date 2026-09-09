@@ -1,15 +1,6 @@
-import { Head, Link } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
+import { DollarSign, ShoppingCart, Users, TrendingUp } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from '@/components/ui/select';
-import { BarChart3, DollarSign, ShoppingCart, Users, TrendingUp } from 'lucide-react';
 import type { Product, User as UserType } from '@/types';
 
 interface ReportsIndexProps {
@@ -21,10 +12,9 @@ interface ReportsIndexProps {
     };
     topProducts: (Product & { sold_count: number })[];
     topCustomers: (UserType & { total_spent: number })[];
-    period: string;
 }
 
-export default function ReportsIndex({ stats, topProducts, topCustomers, period }: ReportsIndexProps) {
+export default function ReportsIndex({ stats, topProducts, topCustomers }: ReportsIndexProps) {
     return (
         <>
             <Head title="Reports - Admin" />

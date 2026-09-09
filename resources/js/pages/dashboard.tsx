@@ -1,8 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { ArrowUpRight, Package, ShoppingBag, Users, DollarSign, AlertTriangle, Tag, ShoppingCart, TicketPercent, BarChart3, FileText, Settings } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Package, ShoppingBag, Users, DollarSign, AlertTriangle, Tag, ShoppingCart, TicketPercent, BarChart3, Settings } from 'lucide-react';
 import { dashboard } from '@/routes';
 
 interface DashboardProps {

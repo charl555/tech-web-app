@@ -1,9 +1,17 @@
 import { Form, Link, usePage } from '@inertiajs/react';
 import { ShoppingCart, Search, User, Menu, X } from 'lucide-react';
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
 import {
     NavigationMenu,
     NavigationMenuItem,
@@ -17,14 +25,6 @@ import {
     SheetTitle,
     SheetTrigger,
 } from '@/components/ui/sheet';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 import type { BreadcrumbItem } from '@/types';
 
@@ -43,10 +43,13 @@ const navItems = [
 ];
 
 export default function PublicLayout({
-    breadcrumbs = [],
+    breadcrumbs: _breadcrumbs = [],
     children,
 }: PublicLayoutProps) {
-    const { auth } = usePage().props;
+    const { auth, cartCount } = usePage().props as {
+        auth: { user?: { name?: string } };
+        cartCount?: number;
+    };
     const [mobileOpen, setMobileOpen] = useState(false);
 
     return (
@@ -107,9 +110,9 @@ export default function PublicLayout({
                                 className="relative"
                             >
                                 <ShoppingCart className="h-5 w-5" />
-                                {Number(usePage().props.cartCount ?? 0) > 0 && (
+                                {Number(cartCount ?? 0) > 0 && (
                                     <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs">
-                                        {Number(usePage().props.cartCount ?? 0)}
+                                        {Number(cartCount ?? 0)}
                                     </Badge>
                                 )}
                             </Button>

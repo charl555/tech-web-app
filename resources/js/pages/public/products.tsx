@@ -1,9 +1,11 @@
 import { Head, Link, Form } from '@inertiajs/react';
-import { SlidersHorizontal, Grid3X3, List, ChevronDown, X } from 'lucide-react';
+import { Grid3X3, List } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardTitle, CardFooter, CardHeader } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
     Select,
     SelectContent,
@@ -11,8 +13,6 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { useState, useMemo } from 'react';
 import type { Product, Category, Brand } from '@/types';
@@ -56,14 +56,23 @@ export default function Products({ products, categories, brands }: ProductsProps
             const matchesMin = minPrice === '' || Number(product.price) >= Number(minPrice);
             const matchesMax = maxPrice === '' || Number(product.price) <= Number(maxPrice);
             const matchesStock = !inStockOnly || product.quantity > 0;
+
             return matchesCategory && matchesBrand && matchesMin && matchesMax && matchesStock;
         });
 
         result = [...result].sort((a, b) => {
-            if (sort === 'price-low') return Number(a.price) - Number(b.price);
-            if (sort === 'price-high') return Number(b.price) - Number(a.price);
-            if (sort === 'newest') return a.id - b.id;
-            if (sort === 'rating') return Number(b.average_rating) - Number(a.average_rating);
+            if (sort === 'price-low') {
+                return Number(a.price) - Number(b.price);
+            }
+            if (sort === 'price-high') {
+                return Number(b.price) - Number(a.price);
+            }
+            if (sort === 'newest') {
+                return a.id - b.id;
+            }
+            if (sort === 'rating') {
+                return Number(b.average_rating) - Number(a.average_rating);
+            }
             return 0;
         });
 

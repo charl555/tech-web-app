@@ -1,11 +1,11 @@
 import { Head, Link, Form } from '@inertiajs/react';
 import { ArrowLeft, Minus, Plus, ShoppingCart, Heart, Share2, Truck, Shield, RotateCcw, Star } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Label } from '@/components/ui/label';
+import { Separator } from '@/components/ui/separator';
 import { useState } from 'react';
 import type { Product } from '@/types';
 

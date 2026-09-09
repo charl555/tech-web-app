@@ -1,10 +1,10 @@
+import { useState } from 'react';
 import { Head, Link } from '@inertiajs/react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Search, Plus } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Plus, Search } from 'lucide-react';
-import { useState } from 'react';
 import type { Brand } from '@/types';
 
 interface BrandsIndexProps {

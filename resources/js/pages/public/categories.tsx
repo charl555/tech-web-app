@@ -1,10 +1,9 @@
 import { Head, Link } from '@inertiajs/react';
-import { Cpu, Zap, HardDrive, Monitor, Keyboard, Mouse, Headphones } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Cpu, Zap, HardDrive, Monitor, Keyboard } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Search } from 'lucide-react';
 import { useState } from 'react';
 import type { Category } from '@/types';
@@ -74,6 +73,7 @@ export default function Categories({ categories }: CategoriesProps) {
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                         {filteredCategories.map((category) => {
                             const Icon = iconMap[category.name] ?? Cpu;
+
                             return (
                                 <Link key={category.id} href="/products">
                                     <Card className="h-full transition-colors hover:border-neutral-400 dark:hover:border-neutral-600">
