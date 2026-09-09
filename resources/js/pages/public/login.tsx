@@ -9,13 +9,19 @@ import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 import { ShoppingCart } from 'lucide-react';
 
-export default function Login({ status, canResetPassword = true }: { status?: string; canResetPassword?: boolean }) {
+export default function Login({
+    status,
+    canResetPassword = true,
+}: {
+    status?: string;
+    canResetPassword?: boolean;
+}) {
     return (
         <>
             <Head title="Sign In - PCForge" />
             <div className="mx-auto max-w-md px-4 py-8">
                 <div className="mb-8 text-center">
-                    <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900">
+                    <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-600 text-white shadow-[0_0_12px_rgba(37,99,235,0.45)]">
                         <ShoppingCart className="h-6 w-6" />
                     </div>
                     <h1 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
@@ -43,7 +49,9 @@ export default function Login({ status, canResetPassword = true }: { status?: st
                             <>
                                 <div className="grid gap-6">
                                     <div className="grid gap-2">
-                                        <Label htmlFor="email">Email address</Label>
+                                        <Label htmlFor="email">
+                                            Email address
+                                        </Label>
                                         <Input
                                             id="email"
                                             type="email"
@@ -59,7 +67,9 @@ export default function Login({ status, canResetPassword = true }: { status?: st
 
                                     <div className="grid gap-2">
                                         <div className="flex items-center">
-                                            <Label htmlFor="password">Password</Label>
+                                            <Label htmlFor="password">
+                                                Password
+                                            </Label>
                                             {canResetPassword && (
                                                 <TextLink
                                                     href="/forgot-password"
@@ -87,7 +97,9 @@ export default function Login({ status, canResetPassword = true }: { status?: st
                                             name="remember"
                                             tabIndex={3}
                                         />
-                                        <Label htmlFor="remember">Remember me</Label>
+                                        <Label htmlFor="remember">
+                                            Remember me
+                                        </Label>
                                     </div>
 
                                     <Button
@@ -96,6 +108,7 @@ export default function Login({ status, canResetPassword = true }: { status?: st
                                         tabIndex={4}
                                         disabled={processing}
                                         data-test="login-button"
+                                        variant="nitro-blue-solid"
                                     >
                                         {processing && <Spinner />}
                                         Sign In
@@ -104,7 +117,10 @@ export default function Login({ status, canResetPassword = true }: { status?: st
 
                                 <div className="text-center text-sm text-muted-foreground">
                                     Don&apos;t have an account?{' '}
-                                    <TextLink href="/account/register" tabIndex={5}>
+                                    <TextLink
+                                        href="/account/register"
+                                        tabIndex={5}
+                                    >
                                         Create an account
                                     </TextLink>
                                 </div>

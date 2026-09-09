@@ -105,7 +105,7 @@ export default function About() {
                     </p>
                     <div className="mt-6 flex justify-center gap-4">
                         <Link href="/products">
-                            <Button>Shop Now</Button>
+                            <Button variant="nitro-blue-solid">Shop Now</Button>
                         </Link>
                         <Link href="/contact">
                             <Button variant="outline">Contact Us</Button>

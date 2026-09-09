@@ -161,6 +161,7 @@ export default function ProductOverview({ product, isWishlisted = false }: Produ
                                                 className="w-full gap-2"
                                                 type="submit"
                                                 onClick={addToCart}
+                                                variant="nitro-blue-solid"
                                             >
                                                 <ShoppingCart className="h-5 w-5" />
                                                 {addedToCart ? 'Added!' : 'Add to Cart'}

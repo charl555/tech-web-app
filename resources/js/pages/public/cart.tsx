@@ -176,7 +176,7 @@ export default function Cart({ cartItems }: CartProps) {
                                     </div>
                                 </CardContent>
                                 <CardFooter>
-                                    <Button className="w-full" size="lg" disabled>
+                                    <Button className="w-full" size="lg" disabled variant="nitro-blue-solid">
                                         Proceed to Checkout
                                     </Button>
                                 </CardFooter>

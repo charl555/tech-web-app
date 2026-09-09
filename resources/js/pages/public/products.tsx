@@ -269,7 +269,7 @@ export default function Products({ products, categories, brands }: ProductsProps
                                                 <Form action="/cart/add" method="post" onClick={(e) => e.stopPropagation()}>
                                                     <input type="hidden" name="product_id" value={product.id} />
                                                     <input type="hidden" name="quantity" value="1" />
-                                                    <Button size="sm" type="submit" disabled={product.quantity === 0}>
+                                                    <Button size="sm" type="submit" disabled={product.quantity === 0} variant="nitro-blue-solid">
                                                         {product.quantity === 0 ? 'Unavailable' : 'Add to Cart'}
                                                     </Button>
                                                 </Form>

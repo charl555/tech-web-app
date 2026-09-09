@@ -42,7 +42,10 @@ const navItems = [
     { title: 'Contact', href: '/contact' },
 ];
 
-export default function PublicLayout({ breadcrumbs = [], children }: PublicLayoutProps) {
+export default function PublicLayout({
+    breadcrumbs = [],
+    children,
+}: PublicLayoutProps) {
     const { auth } = usePage().props;
     const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -51,11 +54,17 @@ export default function PublicLayout({ breadcrumbs = [], children }: PublicLayou
             <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:bg-neutral-950/95">
                 <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 lg:px-8">
                     <div className="flex items-center gap-8">
-                        <Link href="/" prefetch className="flex items-center gap-2">
-                            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900">
+                        <Link
+                            href="/"
+                            prefetch
+                            className="flex items-center gap-2"
+                        >
+                            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white shadow-[0_0_12px_rgba(37,99,235,0.45)]">
                                 <ShoppingCart className="h-5 w-5" />
                             </div>
-                            <span className="text-lg font-bold tracking-tight">PCForge</span>
+                            <span className="text-lg font-bold tracking-tight">
+                                PCForge
+                            </span>
                         </Link>
 
                         <nav className="hidden lg:flex">
@@ -67,7 +76,7 @@ export default function PublicLayout({ breadcrumbs = [], children }: PublicLayou
                                                 href={item.href}
                                                 className={cn(
                                                     navigationMenuTriggerStyle(),
-                                                    'h-9 cursor-pointer px-3 text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100'
+                                                    'h-9 cursor-pointer px-3 text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100',
                                                 )}
                                             >
                                                 {item.title}
@@ -82,7 +91,7 @@ export default function PublicLayout({ breadcrumbs = [], children }: PublicLayou
                     <div className="flex items-center gap-2">
                         <div className="hidden md:flex">
                             <div className="relative">
-                                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-neutral-500" />
+                                <Search className="absolute top-2.5 left-2.5 h-4 w-4 text-neutral-500" />
                                 <Input
                                     type="search"
                                     placeholder="Search parts..."
@@ -92,10 +101,16 @@ export default function PublicLayout({ breadcrumbs = [], children }: PublicLayou
                         </div>
 
                         <Link href="/cart">
-                            <Button variant="ghost" size="icon" className="relative">
+                            <Button
+                                variant="ghost"
+                                size="icon"
+                                className="relative"
+                            >
                                 <ShoppingCart className="h-5 w-5" />
                                 {Number(usePage().props.cartCount ?? 0) > 0 && (
-                                    <Badge className="absolute -right-1 -top-1 h-5 w-5 rounded-full p-0 text-xs">{Number(usePage().props.cartCount ?? 0)}</Badge>
+                                    <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs">
+                                        {Number(usePage().props.cartCount ?? 0)}
+                                    </Badge>
                                 )}
                             </Button>
                         </Link>
@@ -112,7 +127,10 @@ export default function PublicLayout({ breadcrumbs = [], children }: PublicLayou
                                         {auth.user.name || 'Account'}
                                     </DropdownMenuLabel>
                                     <DropdownMenuItem>
-                                        <Link href="/account" className="w-full">
+                                        <Link
+                                            href="/account"
+                                            className="w-full"
+                                        >
                                             Account
                                         </Link>
                                     </DropdownMenuItem>
@@ -135,7 +153,11 @@ export default function PublicLayout({ breadcrumbs = [], children }: PublicLayou
                             </DropdownMenu>
                         ) : (
                             <Link href="/account/login">
-                                <Button variant="ghost" size="sm" className="hidden sm:flex">
+                                <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    className="hidden sm:flex"
+                                >
                                     Sign in
                                 </Button>
                             </Link>
@@ -144,7 +166,11 @@ export default function PublicLayout({ breadcrumbs = [], children }: PublicLayou
                         <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
                             <SheetTrigger asChild className="lg:hidden">
                                 <Button variant="ghost" size="icon">
-                                    {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                                    {mobileOpen ? (
+                                        <X className="h-5 w-5" />
+                                    ) : (
+                                        <Menu className="h-5 w-5" />
+                                    )}
                                 </Button>
                             </SheetTrigger>
                             <SheetContent side="left" className="w-64">
@@ -169,12 +195,26 @@ export default function PublicLayout({ breadcrumbs = [], children }: PublicLayou
                                     ))}
                                     <div className="mt-4 border-t pt-4 dark:border-neutral-800">
                                         {auth.user ? (
-                                            <Link href="/account" onClick={() => setMobileOpen(false)}>
-                                                <Button className="w-full">My Account</Button>
+                                            <Link
+                                                href="/account"
+                                                onClick={() =>
+                                                    setMobileOpen(false)
+                                                }
+                                            >
+                                                <Button className="w-full">
+                                                    My Account
+                                                </Button>
                                             </Link>
                                         ) : (
-                                            <Link href="/account/login" onClick={() => setMobileOpen(false)}>
-                                                <Button className="w-full">Sign in</Button>
+                                            <Link
+                                                href="/account/login"
+                                                onClick={() =>
+                                                    setMobileOpen(false)
+                                                }
+                                            >
+                                                <Button className="w-full">
+                                                    Sign in
+                                                </Button>
                                             </Link>
                                         )}
                                     </div>
@@ -192,22 +232,37 @@ export default function PublicLayout({ breadcrumbs = [], children }: PublicLayou
                     <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
                         <div className="md:col-span-1">
                             <Link href="/" className="flex items-center gap-2">
-                                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900">
+                                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white shadow-[0_0_12px_rgba(37,99,235,0.45)]">
                                     <ShoppingCart className="h-5 w-5" />
                                 </div>
-                                <span className="text-lg font-bold">PCForge</span>
+                                <span className="text-lg font-bold">
+                                    PCForge
+                                </span>
                             </Link>
                             <p className="mt-4 text-sm text-neutral-600 dark:text-neutral-400">
-                                Your one-stop shop for premium computer parts and components.
+                                Your one-stop shop for premium computer parts
+                                and components.
                             </p>
                         </div>
 
                         <div>
-                            <h3 className="text-sm font-semibold uppercase tracking-wider text-neutral-900 dark:text-neutral-100">Shop</h3>
+                            <h3 className="text-sm font-semibold tracking-wider text-neutral-900 uppercase dark:text-neutral-100">
+                                Shop
+                            </h3>
                             <ul className="mt-4 space-y-2">
-                                {['CPUs', 'GPUs', 'Motherboards', 'RAM', 'Storage', 'Power Supplies'].map((item) => (
+                                {[
+                                    'CPUs',
+                                    'GPUs',
+                                    'Motherboards',
+                                    'RAM',
+                                    'Storage',
+                                    'Power Supplies',
+                                ].map((item) => (
                                     <li key={item}>
-                                        <Link href="/products" className="text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100">
+                                        <Link
+                                            href="/products"
+                                            className="text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+                                        >
                                             {item}
                                         </Link>
                                     </li>
@@ -216,11 +271,23 @@ export default function PublicLayout({ breadcrumbs = [], children }: PublicLayou
                         </div>
 
                         <div>
-                            <h3 className="text-sm font-semibold uppercase tracking-wider text-neutral-900 dark:text-neutral-100">Support</h3>
+                            <h3 className="text-sm font-semibold tracking-wider text-neutral-900 uppercase dark:text-neutral-100">
+                                Support
+                            </h3>
                             <ul className="mt-4 space-y-2">
-                                {['Contact Us', 'FAQ', 'Shipping', 'Returns', 'Warranty', 'Track Order'].map((item) => (
+                                {[
+                                    'Contact Us',
+                                    'FAQ',
+                                    'Shipping',
+                                    'Returns',
+                                    'Warranty',
+                                    'Track Order',
+                                ].map((item) => (
                                     <li key={item}>
-                                        <Link href="/contact" className="text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100">
+                                        <Link
+                                            href="/contact"
+                                            className="text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+                                        >
                                             {item}
                                         </Link>
                                     </li>
@@ -229,11 +296,22 @@ export default function PublicLayout({ breadcrumbs = [], children }: PublicLayou
                         </div>
 
                         <div>
-                            <h3 className="text-sm font-semibold uppercase tracking-wider text-neutral-900 dark:text-neutral-100">Company</h3>
+                            <h3 className="text-sm font-semibold tracking-wider text-neutral-900 uppercase dark:text-neutral-100">
+                                Company
+                            </h3>
                             <ul className="mt-4 space-y-2">
-                                {['About Us', 'Careers', 'Press', 'Privacy Policy', 'Terms of Service'].map((item) => (
+                                {[
+                                    'About Us',
+                                    'Careers',
+                                    'Press',
+                                    'Privacy Policy',
+                                    'Terms of Service',
+                                ].map((item) => (
                                     <li key={item}>
-                                        <Link href="/about" className="text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100">
+                                        <Link
+                                            href="/about"
+                                            className="text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+                                        >
                                             {item}
                                         </Link>
                                     </li>
@@ -243,7 +321,8 @@ export default function PublicLayout({ breadcrumbs = [], children }: PublicLayou
                     </div>
 
                     <div className="mt-12 border-t pt-8 text-center text-sm text-neutral-500 dark:border-neutral-800">
-                        © {new Date().getFullYear()} PCForge. All rights reserved.
+                        © {new Date().getFullYear()} PCForge. All rights
+                        reserved.
                     </div>
                 </div>
             </footer>

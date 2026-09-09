@@ -165,7 +165,7 @@ export default function Account({ user, orders, wishlistItems }: AccountProps) {
                                                 </div>
 
                                                 <div className="flex items-center gap-4">
-                                                    <Button disabled={processing} type="submit">
+                                                    <Button disabled={processing} type="submit" variant="nitro-blue-solid">
                                                         {processing ? 'Updating...' : 'Update Password'}
                                                     </Button>
                                                 </div>
@@ -261,7 +261,7 @@ export default function Account({ user, orders, wishlistItems }: AccountProps) {
                                                 When you place an order, it will appear here.
                                             </p>
                                             <Link href="/products">
-                                                <Button className="mt-4">Start Shopping</Button>
+                                                <Button className="mt-4" variant="nitro-blue-solid">Start Shopping</Button>
                                             </Link>
                                         </div>
                                     ) : (

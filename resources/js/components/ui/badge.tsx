@@ -17,6 +17,10 @@ const badgeVariants = cva(
           "border-transparent bg-destructive text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
           "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
+        "nitro-blue-solid":
+          "border-sky-500/60 bg-blue-600 text-white shadow-[0_0_12px_rgba(37,99,235,0.35)] hover:bg-blue-500 hover:border-sky-400 hover:shadow-[0_0_20px_rgba(56,189,248,0.55)]",
+        "nitro-blue-ghost":
+          "border-transparent text-sky-300 hover:bg-blue-500/10 hover:text-sky-100",
       },
     },
     defaultVariants: {
