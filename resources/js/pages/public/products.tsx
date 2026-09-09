@@ -1,5 +1,6 @@
 import { Head, Link, Form } from '@inertiajs/react';
 import { Grid3X3, List } from 'lucide-react';
+import { useState, useMemo } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardTitle, CardFooter, CardHeader } from '@/components/ui/card';
@@ -14,7 +15,6 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
-import { useState, useMemo } from 'react';
 import type { Product, Category, Brand } from '@/types';
 
 interface ProductsProps {
@@ -64,15 +64,19 @@ export default function Products({ products, categories, brands }: ProductsProps
             if (sort === 'price-low') {
                 return Number(a.price) - Number(b.price);
             }
+
             if (sort === 'price-high') {
                 return Number(b.price) - Number(a.price);
             }
+
             if (sort === 'newest') {
                 return a.id - b.id;
             }
+
             if (sort === 'rating') {
                 return Number(b.average_rating) - Number(a.average_rating);
             }
+
             return 0;
         });
 

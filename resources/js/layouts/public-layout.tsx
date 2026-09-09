@@ -43,7 +43,6 @@ const navItems = [
 ];
 
 export default function PublicLayout({
-    breadcrumbs: _breadcrumbs = [],
     children,
 }: PublicLayoutProps) {
     const { auth, cartCount } = usePage().props as {

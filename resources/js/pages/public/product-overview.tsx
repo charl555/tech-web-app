@@ -1,11 +1,11 @@
 import { Head, Link, Form } from '@inertiajs/react';
 import { Minus, Plus, ShoppingCart, Heart, Share2, Truck, Shield, RotateCcw, Star, ChevronRight } from 'lucide-react';
+import { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
-import { useState } from 'react';
 import type { Product } from '@/types';
 
 interface ProductOverviewProps {

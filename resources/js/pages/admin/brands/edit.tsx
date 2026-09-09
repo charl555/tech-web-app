@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { ArrowLeft, Trash2 } from 'lucide-react';
+import { useState } from 'react';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
