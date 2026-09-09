@@ -12,7 +12,12 @@ interface CustomerShowProps {
     wishlistItems: WishlistItem[];
 }
 
-export default function CustomerShow({ customer, orders, addresses, wishlistItems }: CustomerShowProps) {
+export default function CustomerShow({
+    customer,
+    orders,
+    addresses,
+    wishlistItems,
+}: CustomerShowProps) {
     return (
         <>
             <Head title={`${customer.name} - Admin`} />
@@ -26,7 +31,9 @@ export default function CustomerShow({ customer, orders, addresses, wishlistItem
                     </Link>
                     <div>
                         <h1 className="text-2xl font-bold">{customer.name}</h1>
-                        <p className="text-muted-foreground">{customer.email}</p>
+                        <p className="text-muted-foreground">
+                            {customer.email}
+                        </p>
                     </div>
                 </div>
 
@@ -36,11 +43,28 @@ export default function CustomerShow({ customer, orders, addresses, wishlistItem
                             <CardTitle>Profile</CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-2 text-sm">
-                            <div><span className="font-medium">Name:</span> {customer.name}</div>
-                            <div><span className="font-medium">Email:</span> {customer.email}</div>
-                            <div><span className="font-medium">Role:</span> {customer.role}</div>
-                            <div><span className="font-medium">Phone:</span> {customer.phone || 'N/A'}</div>
-                            <div><span className="font-medium">Joined:</span> {new Date(customer.created_at).toLocaleDateString()}</div>
+                            <div>
+                                <span className="font-medium">Name:</span>{' '}
+                                {customer.name}
+                            </div>
+                            <div>
+                                <span className="font-medium">Email:</span>{' '}
+                                {customer.email}
+                            </div>
+                            <div>
+                                <span className="font-medium">Role:</span>{' '}
+                                {customer.role}
+                            </div>
+                            <div>
+                                <span className="font-medium">Phone:</span>{' '}
+                                {customer.phone || 'N/A'}
+                            </div>
+                            <div>
+                                <span className="font-medium">Joined:</span>{' '}
+                                {new Date(
+                                    customer.created_at,
+                                ).toLocaleDateString()}
+                            </div>
                         </CardContent>
                     </Card>
 
@@ -50,18 +74,37 @@ export default function CustomerShow({ customer, orders, addresses, wishlistItem
                         </CardHeader>
                         <CardContent>
                             {addresses.length === 0 ? (
-                                <p className="text-sm text-muted-foreground">No addresses on file.</p>
+                                <p className="text-sm text-muted-foreground">
+                                    No addresses on file.
+                                </p>
                             ) : (
                                 <div className="grid gap-4 md:grid-cols-2">
                                     {addresses.map((address) => (
-                                        <div key={address.id} className="rounded-md border p-3 text-sm">
-                                            <div className="font-medium">{address.type}</div>
-                                            <div>{address.first_name} {address.last_name}</div>
+                                        <div
+                                            key={address.id}
+                                            className="rounded-md border p-3 text-sm"
+                                        >
+                                            <div className="font-medium">
+                                                {address.type}
+                                            </div>
+                                            <div>
+                                                {address.first_name}{' '}
+                                                {address.last_name}
+                                            </div>
                                             <div>{address.address_line_1}</div>
-                                            {address.address_line_2 && <div>{address.address_line_2}</div>}
-                                            <div>{address.city}, {address.state} {address.postal_code}</div>
+                                            {address.address_line_2 && (
+                                                <div>
+                                                    {address.address_line_2}
+                                                </div>
+                                            )}
+                                            <div>
+                                                {address.city}, {address.state}{' '}
+                                                {address.postal_code}
+                                            </div>
                                             <div>{address.country}</div>
-                                            {address.phone && <div>{address.phone}</div>}
+                                            {address.phone && (
+                                                <div>{address.phone}</div>
+                                            )}
                                         </div>
                                     ))}
                                 </div>
@@ -79,32 +122,77 @@ export default function CustomerShow({ customer, orders, addresses, wishlistItem
                             <table className="w-full text-left text-sm">
                                 <thead>
                                     <tr className="border-b">
-                                        <th className="pb-3 font-medium">Order #</th>
-                                        <th className="pb-3 font-medium">Total</th>
-                                        <th className="pb-3 font-medium">Status</th>
-                                        <th className="pb-3 font-medium">Payment</th>
-                                        <th className="pb-3 font-medium">Date</th>
+                                        <th className="pb-3 font-medium">
+                                            Order #
+                                        </th>
+                                        <th className="pb-3 font-medium">
+                                            Total
+                                        </th>
+                                        <th className="pb-3 font-medium">
+                                            Status
+                                        </th>
+                                        <th className="pb-3 font-medium">
+                                            Payment
+                                        </th>
+                                        <th className="pb-3 font-medium">
+                                            Date
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {orders.length === 0 ? (
                                         <tr>
-                                            <td colSpan={5} className="py-8 text-center text-muted-foreground">
+                                            <td
+                                                colSpan={5}
+                                                className="py-8 text-center text-muted-foreground"
+                                            >
                                                 No orders found.
                                             </td>
                                         </tr>
                                     ) : (
                                         orders.map((order) => (
-                                            <tr key={order.id} className="border-b last:border-0">
-                                                <td className="py-3">#{order.order_number}</td>
-                                                <td className="py-3">${Number(order.total_amount).toFixed(2)}</td>
+                                            <tr
+                                                key={order.id}
+                                                className="border-b last:border-0"
+                                            >
                                                 <td className="py-3">
-                                                    <Badge variant={order.status === 'delivered' ? 'default' : 'secondary'}>{order.status}</Badge>
+                                                    #{order.order_number}
                                                 </td>
                                                 <td className="py-3">
-                                                    <Badge variant={order.payment_status === 'paid' ? 'default' : 'secondary'}>{order.payment_status}</Badge>
+                                                    $
+                                                    {Number(
+                                                        order.total_amount,
+                                                    ).toFixed(2)}
                                                 </td>
-                                                <td className="py-3">{new Date(order.created_at).toLocaleDateString()}</td>
+                                                <td className="py-3">
+                                                    <Badge
+                                                        variant={
+                                                            order.status ===
+                                                            'delivered'
+                                                                ? 'default'
+                                                                : 'secondary'
+                                                        }
+                                                    >
+                                                        {order.status}
+                                                    </Badge>
+                                                </td>
+                                                <td className="py-3">
+                                                    <Badge
+                                                        variant={
+                                                            order.payment_status ===
+                                                            'paid'
+                                                                ? 'default'
+                                                                : 'secondary'
+                                                        }
+                                                    >
+                                                        {order.payment_status}
+                                                    </Badge>
+                                                </td>
+                                                <td className="py-3">
+                                                    {new Date(
+                                                        order.created_at,
+                                                    ).toLocaleDateString()}
+                                                </td>
                                             </tr>
                                         ))
                                     )}
@@ -120,14 +208,33 @@ export default function CustomerShow({ customer, orders, addresses, wishlistItem
                     </CardHeader>
                     <CardContent>
                         {wishlistItems.length === 0 ? (
-                            <p className="text-sm text-muted-foreground">No wishlist items.</p>
+                            <p className="text-sm text-muted-foreground">
+                                No wishlist items.
+                            </p>
                         ) : (
                             <div className="grid gap-4 md:grid-cols-3">
                                 {wishlistItems.map((item) => (
-                                    <div key={item.id} className="rounded-md border p-3 text-sm">
-                                        <div className="font-medium">{item.product.name}</div>
-                                        <div>${Number(item.product.price).toFixed(2)}</div>
-                                        {item.product.sale_price && <div className="text-red-600">${Number(item.product.sale_price).toFixed(2)}</div>}
+                                    <div
+                                        key={item.id}
+                                        className="rounded-md border p-3 text-sm"
+                                    >
+                                        <div className="font-medium">
+                                            {item.product.name}
+                                        </div>
+                                        <div>
+                                            $
+                                            {Number(item.product.price).toFixed(
+                                                2,
+                                            )}
+                                        </div>
+                                        {item.product.sale_price && (
+                                            <div className="text-red-600">
+                                                $
+                                                {Number(
+                                                    item.product.sale_price,
+                                                ).toFixed(2)}
+                                            </div>
+                                        )}
                                     </div>
                                 ))}
                             </div>

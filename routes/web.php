@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Public\AccountController;
 use App\Http\Controllers\Public\BrandController as PublicBrandController;
 use App\Http\Controllers\Public\CartController;
 use App\Http\Controllers\Public\CategoryController as PublicCategoryController;
@@ -17,9 +18,12 @@ use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\PasswordController;
 use App\Http\Controllers\Public\ProductController as PublicProductController;
 use App\Http\Controllers\Public\WishlistController;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -49,7 +53,7 @@ Route::post('/account/login', function (Request $request) {
         'remember' => 'boolean',
     ]);
 
-    if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
+    if (! Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
@@ -71,13 +75,13 @@ Route::post('/account/logout', function (Request $request) {
 
 Route::inertia('/account/register', 'public/register')->name('customer.register');
 Route::post('/account/register', function (Request $request) {
-    $validated = \Illuminate\Support\Facades\Validator::make($request->all(), [
+    $validated = Validator::make($request->all(), [
         'name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:users',
-        'password' => ['required', 'confirmed', \Illuminate\Validation\Rules\Password::defaults()],
+        'password' => ['required', 'confirmed', Password::defaults()],
     ])->validate();
 
-    $user = \App\Models\User::create([
+    $user = User::create([
         'name' => $validated['name'],
         'email' => $validated['email'],
         'password' => $validated['password'],
@@ -90,9 +94,9 @@ Route::post('/account/register', function (Request $request) {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/account', [App\Http\Controllers\Public\AccountController::class, 'index'])->name('account');
-    Route::post('/account/password', [App\Http\Controllers\Public\PasswordController::class, 'update'])->name('account.password');
-    Route::post('/wishlist/toggle', [App\Http\Controllers\Public\WishlistController::class, 'toggle'])->name('wishlist.toggle');
+    Route::get('/account', [AccountController::class, 'index'])->name('account');
+    Route::post('/account/password', [PasswordController::class, 'update'])->name('account.password');
+    Route::post('/wishlist/toggle', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
     Route::middleware(['admin'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('admin/products', ProductController::class)->names('admin.products');
@@ -112,4 +116,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 });
 
-require __DIR__ . '/settings.php';
+require __DIR__.'/settings.php';

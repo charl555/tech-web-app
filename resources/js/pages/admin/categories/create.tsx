@@ -3,7 +3,13 @@ import { ArrowLeft } from 'lucide-react';
 import { useState } from 'react';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -38,26 +44,44 @@ export default function CategoryCreate() {
                     </Link>
                     <div>
                         <h1 className="text-2xl font-bold">Add Category</h1>
-                        <p className="text-muted-foreground">Create a new product category.</p>
+                        <p className="text-muted-foreground">
+                            Create a new product category.
+                        </p>
                     </div>
                 </div>
 
                 <Card>
                     <CardHeader>
                         <CardTitle>Category Information</CardTitle>
-                        <CardDescription>Fill in the details for the new category.</CardDescription>
+                        <CardDescription>
+                            Fill in the details for the new category.
+                        </CardDescription>
                     </CardHeader>
                     <CardContent>
                         <form onSubmit={submit} className="space-y-6">
                             <div className="grid gap-4 md:grid-cols-2">
                                 <div className="space-y-2">
                                     <Label htmlFor="name">Category Name</Label>
-                                    <Input id="name" value={data.name} onChange={(e) => setData('name', e.target.value)} required />
+                                    <Input
+                                        id="name"
+                                        value={data.name}
+                                        onChange={(e) =>
+                                            setData('name', e.target.value)
+                                        }
+                                        required
+                                    />
                                     <InputError message={errors.name} />
                                 </div>
                                 <div className="space-y-2">
                                     <Label htmlFor="slug">Slug</Label>
-                                    <Input id="slug" value={data.slug} onChange={(e) => setData('slug', e.target.value)} required />
+                                    <Input
+                                        id="slug"
+                                        value={data.slug}
+                                        onChange={(e) =>
+                                            setData('slug', e.target.value)
+                                        }
+                                        required
+                                    />
                                     <InputError message={errors.slug} />
                                 </div>
                             </div>
@@ -69,7 +93,9 @@ export default function CategoryCreate() {
                                     name="description"
                                     rows={3}
                                     value={data.description}
-                                    onChange={(e) => setData('description', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('description', e.target.value)
+                                    }
                                     className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
                                 />
                                 <InputError message={errors.description} />
@@ -77,15 +103,30 @@ export default function CategoryCreate() {
 
                             <div className="grid gap-4 md:grid-cols-2">
                                 <div className="space-y-2">
-                                    <Label htmlFor="sort_order">Sort Order</Label>
-                                    <Input id="sort_order" type="number" min="0" value={data.sort_order} onChange={(e) => setData('sort_order', parseInt(e.target.value) || 0)} />
+                                    <Label htmlFor="sort_order">
+                                        Sort Order
+                                    </Label>
+                                    <Input
+                                        id="sort_order"
+                                        type="number"
+                                        min="0"
+                                        value={data.sort_order}
+                                        onChange={(e) =>
+                                            setData(
+                                                'sort_order',
+                                                parseInt(e.target.value) || 0,
+                                            )
+                                        }
+                                    />
                                     <InputError message={errors.sort_order} />
                                 </div>
                                 <div className="flex items-center gap-2 pt-6">
                                     <Checkbox
                                         id="is_active"
                                         checked={isActive}
-                                        onCheckedChange={(checked) => setIsActive(Boolean(checked))}
+                                        onCheckedChange={(checked) =>
+                                            setIsActive(Boolean(checked))
+                                        }
                                     />
                                     <Label htmlFor="is_active">Active</Label>
                                 </div>
@@ -93,7 +134,9 @@ export default function CategoryCreate() {
 
                             <div className="flex items-center gap-4">
                                 <Button type="submit" disabled={processing}>
-                                    {processing ? 'Creating...' : 'Create Category'}
+                                    {processing
+                                        ? 'Creating...'
+                                        : 'Create Category'}
                                 </Button>
                                 <Link href="/admin/categories">
                                     <Button variant="outline" type="button">

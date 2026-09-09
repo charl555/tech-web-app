@@ -4,7 +4,13 @@ import { Search } from 'lucide-react';
 import { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import type { Category } from '@/types';
 
@@ -41,13 +47,14 @@ export default function Categories({ categories }: CategoriesProps) {
                         Shop by Category
                     </h1>
                     <p className="mt-2 text-neutral-600 dark:text-neutral-400">
-                        Browse our categories to find the perfect components for your build.
+                        Browse our categories to find the perfect components for
+                        your build.
                     </p>
                 </div>
 
                 <div className="mb-6">
                     <div className="relative w-full sm:w-80">
-                        <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-neutral-500" />
+                        <Search className="absolute top-2.5 left-2.5 h-4 w-4 text-neutral-500" />
                         <Input
                             type="search"
                             placeholder="Search categories..."
@@ -60,7 +67,9 @@ export default function Categories({ categories }: CategoriesProps) {
 
                 {filteredCategories.length === 0 ? (
                     <div className="rounded-lg border border-dashed py-12 text-center dark:border-neutral-800">
-                        <p className="text-neutral-600 dark:text-neutral-400">No categories match your search.</p>
+                        <p className="text-neutral-600 dark:text-neutral-400">
+                            No categories match your search.
+                        </p>
                         <Button
                             className="mt-4"
                             variant="outline"
@@ -84,18 +93,24 @@ export default function Categories({ categories }: CategoriesProps) {
                                                         <Icon className="h-6 w-6 text-neutral-600 dark:text-neutral-400" />
                                                     </div>
                                                     <div>
-                                                        <CardTitle className="text-base">{category.name}</CardTitle>
+                                                        <CardTitle className="text-base">
+                                                            {category.name}
+                                                        </CardTitle>
                                                         <CardDescription className="text-sm">
-                                                            {category.description ?? 'Browse products'}
+                                                            {category.description ??
+                                                                'Browse products'}
                                                         </CardDescription>
                                                     </div>
                                                 </div>
-                                                <Badge variant="secondary">0</Badge>
+                                                <Badge variant="secondary">
+                                                    0
+                                                </Badge>
                                             </div>
                                         </CardHeader>
                                         <CardContent>
                                             <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                                                {category.description ?? 'Explore products in this category.'}
+                                                {category.description ??
+                                                    'Explore products in this category.'}
                                             </p>
                                         </CardContent>
                                     </Card>

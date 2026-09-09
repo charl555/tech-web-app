@@ -9,7 +9,7 @@ use Inertia\Inertia;
 
 class BrandController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): \Inertia\Response
     {
         $brands = Brand::latest()->get(['id', 'name', 'slug', 'description', 'is_active']);
 
@@ -18,12 +18,12 @@ class BrandController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(): \Inertia\Response
     {
         return Inertia::render('admin/brands/create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -39,7 +39,7 @@ class BrandController extends Controller
         return redirect()->route('admin.brands.index');
     }
 
-    public function edit($id)
+    public function edit(Request $request, int $id): \Inertia\Response
     {
         $brand = Brand::findOrFail($id);
 
@@ -48,13 +48,13 @@ class BrandController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
         $brand = Brand::findOrFail($id);
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:brands,slug,' . $id,
+            'slug' => 'required|string|max:255|unique:brands,slug,'.$id,
             'description' => 'nullable|string',
             'is_active' => 'boolean',
         ]);
@@ -66,7 +66,7 @@ class BrandController extends Controller
         return redirect()->route('admin.brands.index');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
         $brand = Brand::findOrFail($id);
         $brand->delete();

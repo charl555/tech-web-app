@@ -1,5 +1,16 @@
 import { Link } from '@inertiajs/react';
-import { LayoutGrid, Package, Tag, ShoppingBag, ShoppingCart, Users, TicketPercent, BarChart3, FileText, Settings } from 'lucide-react';
+import {
+    LayoutGrid,
+    Package,
+    Tag,
+    ShoppingBag,
+    ShoppingCart,
+    Users,
+    TicketPercent,
+    BarChart3,
+    FileText,
+    Settings,
+} from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';

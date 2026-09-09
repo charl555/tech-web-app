@@ -44,6 +44,9 @@ export interface Order {
     status: string;
     total_amount: number;
     payment_status: string;
+    discount_amount: number;
+    tax_amount: number;
+    shipping_amount: number;
     created_at: string;
     user?: {
         id: number;

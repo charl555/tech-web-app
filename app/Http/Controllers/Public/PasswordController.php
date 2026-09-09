@@ -18,7 +18,7 @@ class PasswordController extends Controller
 
         $user = $request->user();
 
-        if (!Auth::validate(['email' => $user->email, 'password' => $request->current_password])) {
+        if (! Auth::validate(['email' => $user->email, 'password' => $request->current_password])) {
             return back()->withErrors([
                 'current_password' => 'The provided password does not match our records.',
             ]);

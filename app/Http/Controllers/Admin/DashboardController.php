@@ -7,11 +7,12 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         $stats = [
             'totalRevenue' => Order::where('payment_status', 'paid')->sum('total_amount'),
@@ -34,6 +35,6 @@ class DashboardController extends Controller
             'stats' => $stats,
             'recentOrders' => $recentOrders,
             'recentCustomers' => $recentCustomers,
-        ]);
+        ])->toResponse($request);
     }
 }

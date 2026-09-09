@@ -3,7 +3,13 @@ import { ArrowLeft, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
     Dialog,
@@ -52,26 +58,44 @@ export default function CategoryEdit({ category }: CategoryEditProps) {
                     </Link>
                     <div>
                         <h1 className="text-2xl font-bold">Edit Category</h1>
-                        <p className="text-muted-foreground">Update category details and settings.</p>
+                        <p className="text-muted-foreground">
+                            Update category details and settings.
+                        </p>
                     </div>
                 </div>
 
                 <Card>
                     <CardHeader>
                         <CardTitle>Category Information</CardTitle>
-                        <CardDescription>Update the details for this category.</CardDescription>
+                        <CardDescription>
+                            Update the details for this category.
+                        </CardDescription>
                     </CardHeader>
                     <CardContent>
                         <form onSubmit={submit} className="space-y-6">
                             <div className="grid gap-4 md:grid-cols-2">
                                 <div className="space-y-2">
                                     <Label htmlFor="name">Category Name</Label>
-                                    <Input id="name" value={data.name} onChange={(e) => setData('name', e.target.value)} required />
+                                    <Input
+                                        id="name"
+                                        value={data.name}
+                                        onChange={(e) =>
+                                            setData('name', e.target.value)
+                                        }
+                                        required
+                                    />
                                     <InputError message={errors.name} />
                                 </div>
                                 <div className="space-y-2">
                                     <Label htmlFor="slug">Slug</Label>
-                                    <Input id="slug" value={data.slug} onChange={(e) => setData('slug', e.target.value)} required />
+                                    <Input
+                                        id="slug"
+                                        value={data.slug}
+                                        onChange={(e) =>
+                                            setData('slug', e.target.value)
+                                        }
+                                        required
+                                    />
                                     <InputError message={errors.slug} />
                                 </div>
                             </div>
@@ -83,7 +107,9 @@ export default function CategoryEdit({ category }: CategoryEditProps) {
                                     name="description"
                                     rows={3}
                                     value={data.description}
-                                    onChange={(e) => setData('description', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('description', e.target.value)
+                                    }
                                     className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
                                 />
                                 <InputError message={errors.description} />
@@ -91,15 +117,30 @@ export default function CategoryEdit({ category }: CategoryEditProps) {
 
                             <div className="grid gap-4 md:grid-cols-2">
                                 <div className="space-y-2">
-                                    <Label htmlFor="sort_order">Sort Order</Label>
-                                    <Input id="sort_order" type="number" min="0" value={data.sort_order} onChange={(e) => setData('sort_order', parseInt(e.target.value) || 0)} />
+                                    <Label htmlFor="sort_order">
+                                        Sort Order
+                                    </Label>
+                                    <Input
+                                        id="sort_order"
+                                        type="number"
+                                        min="0"
+                                        value={data.sort_order}
+                                        onChange={(e) =>
+                                            setData(
+                                                'sort_order',
+                                                parseInt(e.target.value) || 0,
+                                            )
+                                        }
+                                    />
                                     <InputError message={errors.sort_order} />
                                 </div>
                                 <div className="flex items-center gap-2 pt-6">
                                     <Checkbox
                                         id="is_active"
                                         checked={isActive}
-                                        onCheckedChange={(checked) => setIsActive(Boolean(checked))}
+                                        onCheckedChange={(checked) =>
+                                            setIsActive(Boolean(checked))
+                                        }
                                     />
                                     <Label htmlFor="is_active">Active</Label>
                                 </div>
@@ -119,7 +160,7 @@ export default function CategoryEdit({ category }: CategoryEditProps) {
                                     variant="destructive"
                                     onClick={() => setDeleteDialogOpen(true)}
                                 >
-                                    <Trash2 className="h-4 w-4 mr-2" />
+                                    <Trash2 className="mr-2 h-4 w-4" />
                                     Delete Category
                                 </Button>
                             </div>
@@ -133,15 +174,28 @@ export default function CategoryEdit({ category }: CategoryEditProps) {
                     <DialogHeader>
                         <DialogTitle>Delete Category</DialogTitle>
                         <DialogDescription>
-                            Are you sure you want to delete <strong>{category.name}</strong>? This action cannot be undone.
+                            Are you sure you want to delete{' '}
+                            <strong>{category.name}</strong>? This action cannot
+                            be undone.
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>
-                        <Button variant="outline" onClick={() => setDeleteDialogOpen(false)}>
+                        <Button
+                            variant="outline"
+                            onClick={() => setDeleteDialogOpen(false)}
+                        >
                             Cancel
                         </Button>
-                        <form method="post" action={`/admin/categories/${category.id}`} onSubmit={() => setDeleteDialogOpen(false)}>
-                            <input type="hidden" name="_method" value="DELETE" />
+                        <form
+                            method="post"
+                            action={`/admin/categories/${category.id}`}
+                            onSubmit={() => setDeleteDialogOpen(false)}
+                        >
+                            <input
+                                type="hidden"
+                                name="_method"
+                                value="DELETE"
+                            />
                             <Button variant="destructive" type="submit">
                                 Delete
                             </Button>

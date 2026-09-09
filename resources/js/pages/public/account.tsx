@@ -4,7 +4,13 @@ import { useState } from 'react';
 import InputError from '@/components/input-error';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
@@ -18,7 +24,15 @@ interface AccountProps {
         created_at: string;
     };
     orders: Order[];
-    wishlistItems: (WishlistItem & { product: { id: number; name: string; price: number; sale_price?: number; is_active: boolean } })[];
+    wishlistItems: (WishlistItem & {
+        product: {
+            id: number;
+            name: string;
+            price: number;
+            sale_price?: number;
+            is_active: boolean;
+        };
+    })[];
 }
 
 export default function Account({ user, orders, wishlistItems }: AccountProps) {
@@ -56,7 +70,7 @@ export default function Account({ user, orders, wishlistItems }: AccountProps) {
                                 <button
                                     key={tab.key}
                                     onClick={() => setActiveTab(tab.key)}
-                                    className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-colors ${
+                                    className={`border-b-2 py-4 text-sm font-medium whitespace-nowrap transition-colors ${
                                         activeTab === tab.key
                                             ? 'border-neutral-900 text-neutral-900 dark:border-neutral-100 dark:text-neutral-100'
                                             : 'border-transparent text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300'
@@ -74,7 +88,8 @@ export default function Account({ user, orders, wishlistItems }: AccountProps) {
                                 <CardHeader>
                                     <CardTitle>Profile Information</CardTitle>
                                     <CardDescription>
-                                        Your account details and membership info.
+                                        Your account details and membership
+                                        info.
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent className="space-y-6">
@@ -118,15 +133,22 @@ export default function Account({ user, orders, wishlistItems }: AccountProps) {
                                 <CardHeader>
                                     <CardTitle>Change Password</CardTitle>
                                     <CardDescription>
-                                        Update your account password to keep it secure.
+                                        Update your account password to keep it
+                                        secure.
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent>
-                                    <Form action="/account/password" method="post" className="space-y-6">
+                                    <Form
+                                        action="/account/password"
+                                        method="post"
+                                        className="space-y-6"
+                                    >
                                         {({ errors, processing }) => (
                                             <>
                                                 <div className="grid gap-2">
-                                                    <Label htmlFor="current_password">Current Password</Label>
+                                                    <Label htmlFor="current_password">
+                                                        Current Password
+                                                    </Label>
                                                     <Input
                                                         id="current_password"
                                                         type="password"
@@ -135,11 +157,17 @@ export default function Account({ user, orders, wishlistItems }: AccountProps) {
                                                         autoComplete="current-password"
                                                         placeholder="Current password"
                                                     />
-                                                    <InputError message={errors.current_password} />
+                                                    <InputError
+                                                        message={
+                                                            errors.current_password
+                                                        }
+                                                    />
                                                 </div>
 
                                                 <div className="grid gap-2">
-                                                    <Label htmlFor="password">New Password</Label>
+                                                    <Label htmlFor="password">
+                                                        New Password
+                                                    </Label>
                                                     <Input
                                                         id="password"
                                                         type="password"
@@ -148,11 +176,17 @@ export default function Account({ user, orders, wishlistItems }: AccountProps) {
                                                         autoComplete="new-password"
                                                         placeholder="New password"
                                                     />
-                                                    <InputError message={errors.password} />
+                                                    <InputError
+                                                        message={
+                                                            errors.password
+                                                        }
+                                                    />
                                                 </div>
 
                                                 <div className="grid gap-2">
-                                                    <Label htmlFor="password_confirmation">Confirm Password</Label>
+                                                    <Label htmlFor="password_confirmation">
+                                                        Confirm Password
+                                                    </Label>
                                                     <Input
                                                         id="password_confirmation"
                                                         type="password"
@@ -161,12 +195,22 @@ export default function Account({ user, orders, wishlistItems }: AccountProps) {
                                                         autoComplete="new-password"
                                                         placeholder="Confirm password"
                                                     />
-                                                    <InputError message={errors.password_confirmation} />
+                                                    <InputError
+                                                        message={
+                                                            errors.password_confirmation
+                                                        }
+                                                    />
                                                 </div>
 
                                                 <div className="flex items-center gap-4">
-                                                    <Button disabled={processing} type="submit" variant="nitro-blue-solid">
-                                                        {processing ? 'Updating...' : 'Update Password'}
+                                                    <Button
+                                                        disabled={processing}
+                                                        type="submit"
+                                                        variant="nitro-blue-solid"
+                                                    >
+                                                        {processing
+                                                            ? 'Updating...'
+                                                            : 'Update Password'}
                                                     </Button>
                                                 </div>
                                             </>
@@ -192,10 +236,13 @@ export default function Account({ user, orders, wishlistItems }: AccountProps) {
                                                 Your wishlist is empty
                                             </p>
                                             <p className="mt-2 text-neutral-600 dark:text-neutral-400">
-                                                Save items you like by clicking the heart icon on any product.
+                                                Save items you like by clicking
+                                                the heart icon on any product.
                                             </p>
                                             <Link href="/products">
-                                                <Button className="mt-4">Browse Products</Button>
+                                                <Button className="mt-4">
+                                                    Browse Products
+                                                </Button>
                                             </Link>
                                         </div>
                                     ) : (
@@ -212,24 +259,55 @@ export default function Account({ user, orders, wishlistItems }: AccountProps) {
                                                                 href={`/products/${item.product.id}/overview`}
                                                                 className="font-medium hover:underline"
                                                             >
-                                                                {item.product.name}
+                                                                {
+                                                                    item.product
+                                                                        .name
+                                                                }
                                                             </Link>
                                                             <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
-                                                                ${Number(item.product.sale_price ?? item.product.price).toFixed(2)}
+                                                                $
+                                                                {Number(
+                                                                    item.product
+                                                                        .sale_price ??
+                                                                        item
+                                                                            .product
+                                                                            .price,
+                                                                ).toFixed(2)}
                                                             </p>
                                                         </div>
                                                     </div>
                                                     <div className="flex items-center gap-2">
-                                                        {item.product.is_active ? (
-                                                            <Link href={`/products/${item.product.id}/overview`}>
-                                                                <Button size="sm">View</Button>
+                                                        {item.product
+                                                            .is_active ? (
+                                                            <Link
+                                                                href={`/products/${item.product.id}/overview`}
+                                                            >
+                                                                <Button size="sm">
+                                                                    View
+                                                                </Button>
                                                             </Link>
                                                         ) : (
-                                                            <Badge variant="secondary">Unavailable</Badge>
+                                                            <Badge variant="secondary">
+                                                                Unavailable
+                                                            </Badge>
                                                         )}
-                                                        <Form action="/wishlist/toggle" method="post">
-                                                            <input type="hidden" name="product_id" value={item.product.id} />
-                                                            <Button variant="ghost" size="icon" className="h-8 w-8 text-neutral-500 hover:text-red-500">
+                                                        <Form
+                                                            action="/wishlist/toggle"
+                                                            method="post"
+                                                        >
+                                                            <input
+                                                                type="hidden"
+                                                                name="product_id"
+                                                                value={
+                                                                    item.product
+                                                                        .id
+                                                                }
+                                                            />
+                                                            <Button
+                                                                variant="ghost"
+                                                                size="icon"
+                                                                className="h-8 w-8 text-neutral-500 hover:text-red-500"
+                                                            >
                                                                 <Heart className="h-4 w-4 fill-red-500 text-red-500" />
                                                             </Button>
                                                         </Form>
@@ -247,7 +325,8 @@ export default function Account({ user, orders, wishlistItems }: AccountProps) {
                                 <CardHeader>
                                     <CardTitle>Order History</CardTitle>
                                     <CardDescription>
-                                        View your recent orders and their status.
+                                        View your recent orders and their
+                                        status.
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent>
@@ -258,10 +337,16 @@ export default function Account({ user, orders, wishlistItems }: AccountProps) {
                                                 No orders yet
                                             </p>
                                             <p className="mt-2 text-neutral-600 dark:text-neutral-400">
-                                                When you place an order, it will appear here.
+                                                When you place an order, it will
+                                                appear here.
                                             </p>
                                             <Link href="/products">
-                                                <Button className="mt-4" variant="nitro-blue-solid">Start Shopping</Button>
+                                                <Button
+                                                    className="mt-4"
+                                                    variant="nitro-blue-solid"
+                                                >
+                                                    Start Shopping
+                                                </Button>
                                             </Link>
                                         </div>
                                     ) : (
@@ -277,13 +362,18 @@ export default function Account({ user, orders, wishlistItems }: AccountProps) {
                                                                 href={`/orders/${order.id}`}
                                                                 className="font-medium hover:underline"
                                                             >
-                                                                Order #{order.order_number}
+                                                                Order #
+                                                                {
+                                                                    order.order_number
+                                                                }
                                                             </Link>
                                                             <Badge
                                                                 variant={
-                                                                    order.status === 'delivered'
+                                                                    order.status ===
+                                                                    'delivered'
                                                                         ? 'default'
-                                                                        : order.status === 'cancelled'
+                                                                        : order.status ===
+                                                                            'cancelled'
                                                                           ? 'destructive'
                                                                           : 'secondary'
                                                                 }
@@ -292,21 +382,30 @@ export default function Account({ user, orders, wishlistItems }: AccountProps) {
                                                             </Badge>
                                                         </div>
                                                         <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                                                            Placed on {new Date(order.created_at).toLocaleDateString()}
+                                                            Placed on{' '}
+                                                            {new Date(
+                                                                order.created_at,
+                                                            ).toLocaleDateString()}
                                                         </p>
                                                     </div>
                                                     <div className="flex items-center justify-between gap-4 sm:justify-end">
                                                         <span className="text-lg font-bold">
-                                                            ${Number(order.total_amount).toFixed(2)}
+                                                            $
+                                                            {Number(
+                                                                order.total_amount,
+                                                            ).toFixed(2)}
                                                         </span>
                                                         <Badge
                                                             variant={
-                                                                order.payment_status === 'paid'
+                                                                order.payment_status ===
+                                                                'paid'
                                                                     ? 'default'
                                                                     : 'secondary'
                                                             }
                                                         >
-                                                            {order.payment_status}
+                                                            {
+                                                                order.payment_status
+                                                            }
                                                         </Badge>
                                                     </div>
                                                 </div>

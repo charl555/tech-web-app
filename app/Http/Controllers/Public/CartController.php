@@ -17,6 +17,7 @@ class CartController extends Controller
 
         $cartItems = $products->map(function ($product) use ($cart) {
             $item = $cart[$product->id];
+
             return [
                 'id' => $product->id,
                 'name' => $product->name,

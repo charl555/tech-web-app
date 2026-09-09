@@ -3,7 +3,14 @@ import { Grid3X3, List } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardTitle, CardFooter, CardHeader } from '@/components/ui/card';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardTitle,
+    CardFooter,
+    CardHeader,
+} from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -23,7 +30,11 @@ interface ProductsProps {
     brands: Brand[];
 }
 
-export default function Products({ products, categories, brands }: ProductsProps) {
+export default function Products({
+    products,
+    categories,
+    brands,
+}: ProductsProps) {
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
     const [minPrice, setMinPrice] = useState('');
@@ -33,8 +44,16 @@ export default function Products({ products, categories, brands }: ProductsProps
     const [currentPage, setCurrentPage] = useState(1);
     const [view, setView] = useState<'grid' | 'list'>('grid');
 
-    const toggleFilter = (value: string, list: string[], setList: (items: string[]) => void) => {
-        setList(list.includes(value) ? list.filter((item) => item !== value) : [...list, value]);
+    const toggleFilter = (
+        value: string,
+        list: string[],
+        setList: (items: string[]) => void,
+    ) => {
+        setList(
+            list.includes(value)
+                ? list.filter((item) => item !== value)
+                : [...list, value],
+        );
     };
 
     const clearFilters = () => {
@@ -49,15 +68,29 @@ export default function Products({ products, categories, brands }: ProductsProps
 
     const filteredProducts = useMemo(() => {
         let result = products.filter((product) => {
-            const category = categories.find((c) => c.id === product.category_id);
+            const category = categories.find(
+                (c) => c.id === product.category_id,
+            );
             const brand = brands.find((b) => b.id === product.brand_id);
-            const matchesCategory = selectedCategories.length === 0 || (category && selectedCategories.includes(category.slug));
-            const matchesBrand = selectedBrands.length === 0 || (brand && selectedBrands.includes(brand.slug));
-            const matchesMin = minPrice === '' || Number(product.price) >= Number(minPrice);
-            const matchesMax = maxPrice === '' || Number(product.price) <= Number(maxPrice);
+            const matchesCategory =
+                selectedCategories.length === 0 ||
+                (category && selectedCategories.includes(category.slug));
+            const matchesBrand =
+                selectedBrands.length === 0 ||
+                (brand && selectedBrands.includes(brand.slug));
+            const matchesMin =
+                minPrice === '' || Number(product.price) >= Number(minPrice);
+            const matchesMax =
+                maxPrice === '' || Number(product.price) <= Number(maxPrice);
             const matchesStock = !inStockOnly || product.quantity > 0;
 
-            return matchesCategory && matchesBrand && matchesMin && matchesMax && matchesStock;
+            return (
+                matchesCategory &&
+                matchesBrand &&
+                matchesMin &&
+                matchesMax &&
+                matchesStock
+            );
         });
 
         result = [...result].sort((a, b) => {
@@ -81,12 +114,33 @@ export default function Products({ products, categories, brands }: ProductsProps
         });
 
         return result;
-    }, [products, categories, brands, selectedCategories, selectedBrands, minPrice, maxPrice, inStockOnly, sort]);
+    }, [
+        products,
+        categories,
+        brands,
+        selectedCategories,
+        selectedBrands,
+        minPrice,
+        maxPrice,
+        inStockOnly,
+        sort,
+    ]);
 
     const ITEMS_PER_PAGE = 6;
-    const totalPages = Math.max(1, Math.ceil(filteredProducts.length / ITEMS_PER_PAGE));
-    const paginatedProducts = filteredProducts.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
-    const hasActiveFilters = selectedCategories.length > 0 || selectedBrands.length > 0 || minPrice !== '' || maxPrice !== '' || inStockOnly;
+    const totalPages = Math.max(
+        1,
+        Math.ceil(filteredProducts.length / ITEMS_PER_PAGE),
+    );
+    const paginatedProducts = filteredProducts.slice(
+        (currentPage - 1) * ITEMS_PER_PAGE,
+        currentPage * ITEMS_PER_PAGE,
+    );
+    const hasActiveFilters =
+        selectedCategories.length > 0 ||
+        selectedBrands.length > 0 ||
+        minPrice !== '' ||
+        maxPrice !== '' ||
+        inStockOnly;
 
     return (
         <>
@@ -104,13 +158,20 @@ export default function Products({ products, categories, brands }: ProductsProps
 
                 <div className="flex flex-col gap-6 lg:flex-row">
                     {/* Sidebar Filters */}
-                    <aside className="w-full lg:w-64 shrink-0">
+                    <aside className="w-full shrink-0 lg:w-64">
                         <Card>
                             <CardHeader className="pb-4">
                                 <div className="flex items-center justify-between">
-                                    <CardTitle className="text-base">Filters</CardTitle>
+                                    <CardTitle className="text-base">
+                                        Filters
+                                    </CardTitle>
                                     {hasActiveFilters && (
-                                        <Button variant="ghost" size="sm" className="h-auto p-0 text-xs" onClick={clearFilters}>
+                                        <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            className="h-auto p-0 text-xs"
+                                            onClick={clearFilters}
+                                        >
                                             Clear all
                                         </Button>
                                     )}
@@ -118,16 +179,32 @@ export default function Products({ products, categories, brands }: ProductsProps
                             </CardHeader>
                             <CardContent className="space-y-6">
                                 <div className="space-y-3">
-                                    <Label className="text-sm font-medium">Category</Label>
+                                    <Label className="text-sm font-medium">
+                                        Category
+                                    </Label>
                                     <div className="space-y-2">
                                         {categories.map((cat) => (
-                                            <div key={cat.id} className="flex items-center gap-2">
+                                            <div
+                                                key={cat.id}
+                                                className="flex items-center gap-2"
+                                            >
                                                 <Checkbox
                                                     id={`cat-${cat.id}`}
-                                                    checked={selectedCategories.includes(cat.slug)}
-                                                    onCheckedChange={() => toggleFilter(cat.slug, selectedCategories, setSelectedCategories)}
+                                                    checked={selectedCategories.includes(
+                                                        cat.slug,
+                                                    )}
+                                                    onCheckedChange={() =>
+                                                        toggleFilter(
+                                                            cat.slug,
+                                                            selectedCategories,
+                                                            setSelectedCategories,
+                                                        )
+                                                    }
                                                 />
-                                                <Label htmlFor={`cat-${cat.id}`} className="text-sm font-normal">
+                                                <Label
+                                                    htmlFor={`cat-${cat.id}`}
+                                                    className="text-sm font-normal"
+                                                >
                                                     {cat.name}
                                                 </Label>
                                             </div>
@@ -138,16 +215,32 @@ export default function Products({ products, categories, brands }: ProductsProps
                                 <Separator />
 
                                 <div className="space-y-3">
-                                    <Label className="text-sm font-medium">Brand</Label>
+                                    <Label className="text-sm font-medium">
+                                        Brand
+                                    </Label>
                                     <div className="space-y-2">
                                         {brands.map((brand) => (
-                                            <div key={brand.id} className="flex items-center gap-2">
+                                            <div
+                                                key={brand.id}
+                                                className="flex items-center gap-2"
+                                            >
                                                 <Checkbox
                                                     id={`brand-${brand.id}`}
-                                                    checked={selectedBrands.includes(brand.slug)}
-                                                    onCheckedChange={() => toggleFilter(brand.slug, selectedBrands, setSelectedBrands)}
+                                                    checked={selectedBrands.includes(
+                                                        brand.slug,
+                                                    )}
+                                                    onCheckedChange={() =>
+                                                        toggleFilter(
+                                                            brand.slug,
+                                                            selectedBrands,
+                                                            setSelectedBrands,
+                                                        )
+                                                    }
                                                 />
-                                                <Label htmlFor={`brand-${brand.id}`} className="text-sm font-normal">
+                                                <Label
+                                                    htmlFor={`brand-${brand.id}`}
+                                                    className="text-sm font-normal"
+                                                >
                                                     {brand.name}
                                                 </Label>
                                             </div>
@@ -158,7 +251,9 @@ export default function Products({ products, categories, brands }: ProductsProps
                                 <Separator />
 
                                 <div className="space-y-3">
-                                    <Label className="text-sm font-medium">Price Range</Label>
+                                    <Label className="text-sm font-medium">
+                                        Price Range
+                                    </Label>
                                     <div className="flex items-center gap-2">
                                         <Input
                                             type="number"
@@ -170,7 +265,9 @@ export default function Products({ products, categories, brands }: ProductsProps
                                             }}
                                             className="h-9"
                                         />
-                                        <span className="text-neutral-500">-</span>
+                                        <span className="text-neutral-500">
+                                            -
+                                        </span>
                                         <Input
                                             type="number"
                                             placeholder="Max"
@@ -187,17 +284,24 @@ export default function Products({ products, categories, brands }: ProductsProps
                                 <Separator />
 
                                 <div className="space-y-3">
-                                    <Label className="text-sm font-medium">Availability</Label>
+                                    <Label className="text-sm font-medium">
+                                        Availability
+                                    </Label>
                                     <div className="flex items-center gap-2">
                                         <Checkbox
                                             id="in-stock"
                                             checked={inStockOnly}
                                             onCheckedChange={(checked) => {
-                                                setInStockOnly(Boolean(checked));
+                                                setInStockOnly(
+                                                    Boolean(checked),
+                                                );
                                                 setCurrentPage(1);
                                             }}
                                         />
-                                        <Label htmlFor="in-stock" className="text-sm font-normal">
+                                        <Label
+                                            htmlFor="in-stock"
+                                            className="text-sm font-normal"
+                                        >
                                             In Stock Only
                                         </Label>
                                     </div>
@@ -238,11 +342,21 @@ export default function Products({ products, categories, brands }: ProductsProps
                                         <SelectValue placeholder="Sort by" />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value="featured">Featured</SelectItem>
-                                        <SelectItem value="newest">Newest</SelectItem>
-                                        <SelectItem value="price-low">Price: Low to High</SelectItem>
-                                        <SelectItem value="price-high">Price: High to Low</SelectItem>
-                                        <SelectItem value="rating">Top Rated</SelectItem>
+                                        <SelectItem value="featured">
+                                            Featured
+                                        </SelectItem>
+                                        <SelectItem value="newest">
+                                            Newest
+                                        </SelectItem>
+                                        <SelectItem value="price-low">
+                                            Price: Low to High
+                                        </SelectItem>
+                                        <SelectItem value="price-high">
+                                            Price: High to Low
+                                        </SelectItem>
+                                        <SelectItem value="rating">
+                                            Top Rated
+                                        </SelectItem>
                                     </SelectContent>
                                 </Select>
                             </div>
@@ -250,40 +364,89 @@ export default function Products({ products, categories, brands }: ProductsProps
 
                         {paginatedProducts.length === 0 ? (
                             <div className="rounded-lg border border-dashed py-16 text-center dark:border-neutral-800">
-                                <p className="text-neutral-600 dark:text-neutral-400">No products match your filters.</p>
-                                <Button className="mt-4" variant="outline" onClick={clearFilters}>
+                                <p className="text-neutral-600 dark:text-neutral-400">
+                                    No products match your filters.
+                                </p>
+                                <Button
+                                    className="mt-4"
+                                    variant="outline"
+                                    onClick={clearFilters}
+                                >
                                     Clear filters
                                 </Button>
                             </div>
                         ) : view === 'grid' ? (
                             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
                                 {paginatedProducts.map((product) => (
-                                    <Link key={product.id} href={`/products/${product.id}/overview`}>
-                                        <Card className="overflow-hidden transition-shadow hover:shadow-lg cursor-pointer">
+                                    <Link
+                                        key={product.id}
+                                        href={`/products/${product.id}/overview`}
+                                    >
+                                        <Card className="cursor-pointer overflow-hidden transition-shadow hover:shadow-lg">
                                             <div className="aspect-square bg-neutral-100 dark:bg-neutral-800" />
                                             <CardHeader className="p-4">
                                                 <div className="flex items-start justify-between gap-2">
-                                                    <CardTitle className="line-clamp-1 text-base">{product.name}</CardTitle>
-                                                    <Badge variant="secondary" className="shrink-0">
-                                                        {product.is_featured ? 'Featured' : 'New'}
+                                                    <CardTitle className="line-clamp-1 text-base">
+                                                        {product.name}
+                                                    </CardTitle>
+                                                    <Badge
+                                                        variant="secondary"
+                                                        className="shrink-0"
+                                                    >
+                                                        {product.is_featured
+                                                            ? 'Featured'
+                                                            : 'New'}
                                                     </Badge>
                                                 </div>
                                                 <CardDescription className="line-clamp-2 text-sm">
-                                                    {product.short_description ?? product.description}
+                                                    {product.short_description ??
+                                                        product.description}
                                                 </CardDescription>
                                             </CardHeader>
                                             <CardFooter className="flex items-center justify-between p-4 pt-0">
                                                 <div className="flex flex-col">
-                                                    <span className="text-lg font-bold">${(Number(product.sale_price ?? product.price)).toFixed(2)}</span>
+                                                    <span className="text-lg font-bold">
+                                                        $
+                                                        {Number(
+                                                            product.sale_price ??
+                                                                product.price,
+                                                        ).toFixed(2)}
+                                                    </span>
                                                     {product.quantity === 0 && (
-                                                        <span className="text-sm text-neutral-500">Out of stock</span>
+                                                        <span className="text-sm text-neutral-500">
+                                                            Out of stock
+                                                        </span>
                                                     )}
                                                 </div>
-                                                <Form action="/cart/add" method="post" onClick={(e) => e.stopPropagation()}>
-                                                    <input type="hidden" name="product_id" value={product.id} />
-                                                    <input type="hidden" name="quantity" value="1" />
-                                                    <Button size="sm" type="submit" disabled={product.quantity === 0} variant="nitro-blue-solid">
-                                                        {product.quantity === 0 ? 'Unavailable' : 'Add to Cart'}
+                                                <Form
+                                                    action="/cart/add"
+                                                    method="post"
+                                                    onClick={(e) =>
+                                                        e.stopPropagation()
+                                                    }
+                                                >
+                                                    <input
+                                                        type="hidden"
+                                                        name="product_id"
+                                                        value={product.id}
+                                                    />
+                                                    <input
+                                                        type="hidden"
+                                                        name="quantity"
+                                                        value="1"
+                                                    />
+                                                    <Button
+                                                        size="sm"
+                                                        type="submit"
+                                                        disabled={
+                                                            product.quantity ===
+                                                            0
+                                                        }
+                                                        variant="nitro-blue-solid"
+                                                    >
+                                                        {product.quantity === 0
+                                                            ? 'Unavailable'
+                                                            : 'Add to Cart'}
                                                     </Button>
                                                 </Form>
                                             </CardFooter>
@@ -294,8 +457,11 @@ export default function Products({ products, categories, brands }: ProductsProps
                         ) : (
                             <div className="space-y-4">
                                 {paginatedProducts.map((product) => (
-                                    <Link key={product.id} href={`/products/${product.id}/overview`}>
-                                        <Card className="overflow-hidden transition-shadow hover:shadow-lg cursor-pointer">
+                                    <Link
+                                        key={product.id}
+                                        href={`/products/${product.id}/overview`}
+                                    >
+                                        <Card className="cursor-pointer overflow-hidden transition-shadow hover:shadow-lg">
                                             <CardContent className="p-4">
                                                 <div className="flex gap-4">
                                                     <div className="h-32 w-32 shrink-0 bg-neutral-100 dark:bg-neutral-800" />
@@ -303,23 +469,65 @@ export default function Products({ products, categories, brands }: ProductsProps
                                                         <div>
                                                             <div className="flex items-start justify-between gap-4">
                                                                 <div>
-                                                                    <CardTitle className="text-base">{product.name}</CardTitle>
+                                                                    <CardTitle className="text-base">
+                                                                        {
+                                                                            product.name
+                                                                        }
+                                                                    </CardTitle>
                                                                     <CardDescription className="line-clamp-2 text-sm">
-                                                                        {product.short_description ?? product.description}
+                                                                        {product.short_description ??
+                                                                            product.description}
                                                                     </CardDescription>
                                                                 </div>
-                                                                <Badge variant="secondary" className="shrink-0">
-                                                                    {product.is_featured ? 'Featured' : 'New'}
+                                                                <Badge
+                                                                    variant="secondary"
+                                                                    className="shrink-0"
+                                                                >
+                                                                    {product.is_featured
+                                                                        ? 'Featured'
+                                                                        : 'New'}
                                                                 </Badge>
                                                             </div>
                                                         </div>
                                                         <div className="mt-3 flex items-center justify-between">
-                                                            <span className="text-lg font-bold">${(Number(product.sale_price ?? product.price)).toFixed(2)}</span>
-                                                            <Form action="/cart/add" method="post" onClick={(e) => e.stopPropagation()}>
-                                                                <input type="hidden" name="product_id" value={product.id} />
-                                                                <input type="hidden" name="quantity" value="1" />
-                                                                <Button size="sm" type="submit" disabled={product.quantity === 0}>
-                                                                    {product.quantity === 0 ? 'Unavailable' : 'Add to Cart'}
+                                                            <span className="text-lg font-bold">
+                                                                $
+                                                                {Number(
+                                                                    product.sale_price ??
+                                                                        product.price,
+                                                                ).toFixed(2)}
+                                                            </span>
+                                                            <Form
+                                                                action="/cart/add"
+                                                                method="post"
+                                                                onClick={(e) =>
+                                                                    e.stopPropagation()
+                                                                }
+                                                            >
+                                                                <input
+                                                                    type="hidden"
+                                                                    name="product_id"
+                                                                    value={
+                                                                        product.id
+                                                                    }
+                                                                />
+                                                                <input
+                                                                    type="hidden"
+                                                                    name="quantity"
+                                                                    value="1"
+                                                                />
+                                                                <Button
+                                                                    size="sm"
+                                                                    type="submit"
+                                                                    disabled={
+                                                                        product.quantity ===
+                                                                        0
+                                                                    }
+                                                                >
+                                                                    {product.quantity ===
+                                                                    0
+                                                                        ? 'Unavailable'
+                                                                        : 'Add to Cart'}
                                                                 </Button>
                                                             </Form>
                                                         </div>
@@ -338,16 +546,27 @@ export default function Products({ products, categories, brands }: ProductsProps
                                     variant="outline"
                                     size="sm"
                                     disabled={currentPage === 1}
-                                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                                    onClick={() =>
+                                        setCurrentPage((p) =>
+                                            Math.max(1, p - 1),
+                                        )
+                                    }
                                 >
                                     Previous
                                 </Button>
-                                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                                {Array.from(
+                                    { length: totalPages },
+                                    (_, i) => i + 1,
+                                ).map((page) => (
                                     <Button
                                         key={page}
                                         variant="outline"
                                         size="sm"
-                                        className={currentPage === page ? 'bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900' : ''}
+                                        className={
+                                            currentPage === page
+                                                ? 'bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900'
+                                                : ''
+                                        }
                                         onClick={() => setCurrentPage(page)}
                                     >
                                         {page}
@@ -357,7 +576,11 @@ export default function Products({ products, categories, brands }: ProductsProps
                                     variant="outline"
                                     size="sm"
                                     disabled={currentPage === totalPages}
-                                    onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                                    onClick={() =>
+                                        setCurrentPage((p) =>
+                                            Math.min(totalPages, p + 1),
+                                        )
+                                    }
                                 >
                                     Next
                                 </Button>

@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Inertia\Inertia;
 
 class CustomerController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         $search = $request->query('search', '');
 
@@ -25,10 +26,10 @@ class CustomerController extends Controller
             'filters' => [
                 'search' => $search,
             ],
-        ]);
+        ])->toResponse($request);
     }
 
-    public function show($id)
+    public function show(Request $request, int $id): Response
     {
         $customer = User::where('role', 'User')->findOrFail($id);
         $orders = $customer->orders()->latest()->take(10)->get(['id', 'order_number', 'total_amount', 'status', 'payment_status', 'created_at']);
@@ -40,6 +41,6 @@ class CustomerController extends Controller
             'orders' => $orders,
             'addresses' => $addresses,
             'wishlistItems' => $wishlistItems,
-        ]);
+        ])->toResponse($request);
     }
 }

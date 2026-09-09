@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Inertia\Inertia;
 
 class SettingsController extends Controller
 {
-    public function index()
+    public function index(): Response
     {
         $settings = [
             'store_name' => config('app.name', 'PCForge'),
@@ -26,10 +27,10 @@ class SettingsController extends Controller
 
         return Inertia::render('admin/settings/index', [
             'settings' => $settings,
-        ]);
+        ])->toResponse(request());
     }
 
-    public function update(Request $request)
+    public function update(Request $request): \Illuminate\Http\RedirectResponse
     {
         $validated = $request->validate([
             'store_name' => 'required|string|max:255',

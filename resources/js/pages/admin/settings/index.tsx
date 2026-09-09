@@ -1,7 +1,13 @@
 import { Head, useForm } from '@inertiajs/react';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -50,7 +56,9 @@ export default function SettingsIndex({ settings }: SettingsIndexProps) {
                 <div className="flex items-center gap-4">
                     <div>
                         <h1 className="text-2xl font-bold">Site Settings</h1>
-                        <p className="text-muted-foreground">Configure global store settings.</p>
+                        <p className="text-muted-foreground">
+                            Configure global store settings.
+                        </p>
                     </div>
                 </div>
 
@@ -58,26 +66,60 @@ export default function SettingsIndex({ settings }: SettingsIndexProps) {
                     <Card>
                         <CardHeader>
                             <CardTitle>General Settings</CardTitle>
-                            <CardDescription>Basic store information and configuration.</CardDescription>
+                            <CardDescription>
+                                Basic store information and configuration.
+                            </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-6">
                             <div className="grid gap-4 md:grid-cols-2">
                                 <div className="space-y-2">
-                                    <Label htmlFor="store_name">Store Name</Label>
-                                    <Input id="store_name" value={data.store_name} onChange={(e) => setData('store_name', e.target.value)} required />
+                                    <Label htmlFor="store_name">
+                                        Store Name
+                                    </Label>
+                                    <Input
+                                        id="store_name"
+                                        value={data.store_name}
+                                        onChange={(e) =>
+                                            setData(
+                                                'store_name',
+                                                e.target.value,
+                                            )
+                                        }
+                                        required
+                                    />
                                     <InputError message={errors.store_name} />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="contact_email">Contact Email</Label>
-                                    <Input id="contact_email" type="email" value={data.contact_email} onChange={(e) => setData('contact_email', e.target.value)} />
-                                    <InputError message={errors.contact_email} />
+                                    <Label htmlFor="contact_email">
+                                        Contact Email
+                                    </Label>
+                                    <Input
+                                        id="contact_email"
+                                        type="email"
+                                        value={data.contact_email}
+                                        onChange={(e) =>
+                                            setData(
+                                                'contact_email',
+                                                e.target.value,
+                                            )
+                                        }
+                                    />
+                                    <InputError
+                                        message={errors.contact_email}
+                                    />
                                 </div>
                             </div>
 
                             <div className="grid gap-4 md:grid-cols-2">
                                 <div className="space-y-2">
                                     <Label htmlFor="phone">Phone</Label>
-                                    <Input id="phone" value={data.phone} onChange={(e) => setData('phone', e.target.value)} />
+                                    <Input
+                                        id="phone"
+                                        value={data.phone}
+                                        onChange={(e) =>
+                                            setData('phone', e.target.value)
+                                        }
+                                    />
                                     <InputError message={errors.phone} />
                                 </div>
                                 <div className="space-y-2">
@@ -85,7 +127,9 @@ export default function SettingsIndex({ settings }: SettingsIndexProps) {
                                     <select
                                         id="currency"
                                         value={data.currency}
-                                        onChange={(e) => setData('currency', e.target.value)}
+                                        onChange={(e) =>
+                                            setData('currency', e.target.value)
+                                        }
                                         className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                                     >
                                         <option value="USD">USD</option>
@@ -102,7 +146,9 @@ export default function SettingsIndex({ settings }: SettingsIndexProps) {
                                     id="address"
                                     rows={3}
                                     value={data.address}
-                                    onChange={(e) => setData('address', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('address', e.target.value)
+                                    }
                                     className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
                                 />
                                 <InputError message={errors.address} />
@@ -114,20 +160,43 @@ export default function SettingsIndex({ settings }: SettingsIndexProps) {
                                     <select
                                         id="timezone"
                                         value={data.timezone}
-                                        onChange={(e) => setData('timezone', e.target.value)}
+                                        onChange={(e) =>
+                                            setData('timezone', e.target.value)
+                                        }
                                         className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                                     >
                                         <option value="UTC">UTC</option>
-                                        <option value="America/New_York">America/New_York</option>
-                                        <option value="America/Los_Angeles">America/Los_Angeles</option>
-                                        <option value="Europe/London">Europe/London</option>
+                                        <option value="America/New_York">
+                                            America/New_York
+                                        </option>
+                                        <option value="America/Los_Angeles">
+                                            America/Los_Angeles
+                                        </option>
+                                        <option value="Europe/London">
+                                            Europe/London
+                                        </option>
                                     </select>
                                     <InputError message={errors.timezone} />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="free_shipping_threshold">Free Shipping Threshold ($)</Label>
-                                    <Input id="free_shipping_threshold" type="number" min="0" value={data.free_shipping_threshold} onChange={(e) => setData('free_shipping_threshold', parseFloat(e.target.value))} />
-                                    <InputError message={errors.free_shipping_threshold} />
+                                    <Label htmlFor="free_shipping_threshold">
+                                        Free Shipping Threshold ($)
+                                    </Label>
+                                    <Input
+                                        id="free_shipping_threshold"
+                                        type="number"
+                                        min="0"
+                                        value={data.free_shipping_threshold}
+                                        onChange={(e) =>
+                                            setData(
+                                                'free_shipping_threshold',
+                                                parseFloat(e.target.value),
+                                            )
+                                        }
+                                    />
+                                    <InputError
+                                        message={errors.free_shipping_threshold}
+                                    />
                                 </div>
                             </div>
                         </CardContent>
@@ -136,24 +205,40 @@ export default function SettingsIndex({ settings }: SettingsIndexProps) {
                     <Card className="mt-4">
                         <CardHeader>
                             <CardTitle>Payment Settings</CardTitle>
-                            <CardDescription>Configure payment methods.</CardDescription>
+                            <CardDescription>
+                                Configure payment methods.
+                            </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
                             <div className="flex items-center gap-2">
                                 <Checkbox
                                     id="stripe_enabled"
                                     checked={data.stripe_enabled}
-                                    onCheckedChange={(checked) => setData('stripe_enabled', Boolean(checked))}
+                                    onCheckedChange={(checked) =>
+                                        setData(
+                                            'stripe_enabled',
+                                            Boolean(checked),
+                                        )
+                                    }
                                 />
-                                <Label htmlFor="stripe_enabled">Enable Stripe</Label>
+                                <Label htmlFor="stripe_enabled">
+                                    Enable Stripe
+                                </Label>
                             </div>
                             <div className="flex items-center gap-2">
                                 <Checkbox
                                     id="paypal_enabled"
                                     checked={data.paypal_enabled}
-                                    onCheckedChange={(checked) => setData('paypal_enabled', Boolean(checked))}
+                                    onCheckedChange={(checked) =>
+                                        setData(
+                                            'paypal_enabled',
+                                            Boolean(checked),
+                                        )
+                                    }
                                 />
-                                <Label htmlFor="paypal_enabled">Enable PayPal</Label>
+                                <Label htmlFor="paypal_enabled">
+                                    Enable PayPal
+                                </Label>
                             </div>
                         </CardContent>
                     </Card>
@@ -161,19 +246,49 @@ export default function SettingsIndex({ settings }: SettingsIndexProps) {
                     <Card className="mt-4">
                         <CardHeader>
                             <CardTitle>Email Settings</CardTitle>
-                            <CardDescription>Configure email sending preferences.</CardDescription>
+                            <CardDescription>
+                                Configure email sending preferences.
+                            </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-6">
                             <div className="grid gap-4 md:grid-cols-2">
                                 <div className="space-y-2">
-                                    <Label htmlFor="email_from_name">From Name</Label>
-                                    <Input id="email_from_name" value={data.email_from_name} onChange={(e) => setData('email_from_name', e.target.value)} required />
-                                    <InputError message={errors.email_from_name} />
+                                    <Label htmlFor="email_from_name">
+                                        From Name
+                                    </Label>
+                                    <Input
+                                        id="email_from_name"
+                                        value={data.email_from_name}
+                                        onChange={(e) =>
+                                            setData(
+                                                'email_from_name',
+                                                e.target.value,
+                                            )
+                                        }
+                                        required
+                                    />
+                                    <InputError
+                                        message={errors.email_from_name}
+                                    />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="email_from_address">From Address</Label>
-                                    <Input id="email_from_address" type="email" value={data.email_from_address} onChange={(e) => setData('email_from_address', e.target.value)} />
-                                    <InputError message={errors.email_from_address} />
+                                    <Label htmlFor="email_from_address">
+                                        From Address
+                                    </Label>
+                                    <Input
+                                        id="email_from_address"
+                                        type="email"
+                                        value={data.email_from_address}
+                                        onChange={(e) =>
+                                            setData(
+                                                'email_from_address',
+                                                e.target.value,
+                                            )
+                                        }
+                                    />
+                                    <InputError
+                                        message={errors.email_from_address}
+                                    />
                                 </div>
                             </div>
                         </CardContent>

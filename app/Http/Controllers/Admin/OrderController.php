@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Inertia\Inertia;
 
 class OrderController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         $statusFilter = $request->query('status', 'all');
         $paymentStatusFilter = $request->query('payment_status', 'all');
@@ -31,19 +32,19 @@ class OrderController extends Controller
                 'payment_status' => $paymentStatusFilter,
                 'search' => $search,
             ],
-        ]);
+        ])->toResponse($request);
     }
 
-    public function show($id)
+    public function show(Request $request, int $id): Response
     {
         $order = Order::with(['user:id,name,email', 'items.product:id,name,price', 'payments'])->findOrFail($id);
 
         return Inertia::render('admin/orders/show', [
             'order' => $order,
-        ]);
+        ])->toResponse($request);
     }
 
-    public function updateStatus(Request $request, $id)
+    public function updateStatus(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
         $order = Order::findOrFail($id);
 
@@ -58,7 +59,7 @@ class OrderController extends Controller
         return back();
     }
 
-    public function updatePaymentStatus(Request $request, $id)
+    public function updatePaymentStatus(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
         $order = Order::findOrFail($id);
 

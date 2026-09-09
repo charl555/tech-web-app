@@ -42,9 +42,7 @@ const navItems = [
     { title: 'Contact', href: '/contact' },
 ];
 
-export default function PublicLayout({
-    children,
-}: PublicLayoutProps) {
+export default function PublicLayout({ children }: PublicLayoutProps) {
     const { auth, cartCount } = usePage().props as {
         auth: { user?: { name?: string } };
         cartCount?: number;

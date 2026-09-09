@@ -2,7 +2,13 @@ import { Head, Link } from '@inertiajs/react';
 import { Search } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import type { Brand } from '@/types';
@@ -16,7 +22,9 @@ export default function Brands({ brands }: BrandsProps) {
     const [showFeaturedOnly, setShowFeaturedOnly] = useState(false);
 
     const filteredBrands = brands.filter((brand) => {
-        const matchesSearch = brand.name.toLowerCase().includes(search.toLowerCase());
+        const matchesSearch = brand.name
+            .toLowerCase()
+            .includes(search.toLowerCase());
         const matchesFeatured = showFeaturedOnly ? brand.is_active : true;
 
         return matchesSearch && matchesFeatured;
@@ -32,13 +40,14 @@ export default function Brands({ brands }: BrandsProps) {
                         Shop by Brand
                     </h1>
                     <p className="mt-2 text-neutral-600 dark:text-neutral-400">
-                        Explore products from the world's leading technology brands.
+                        Explore products from the world's leading technology
+                        brands.
                     </p>
                 </div>
 
                 <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div className="relative w-full sm:w-80">
-                        <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-neutral-500" />
+                        <Search className="absolute top-2.5 left-2.5 h-4 w-4 text-neutral-500" />
                         <Input
                             type="search"
                             placeholder="Search brands..."
@@ -52,10 +61,15 @@ export default function Brands({ brands }: BrandsProps) {
                             id="featured-only"
                             type="checkbox"
                             checked={showFeaturedOnly}
-                            onChange={(e) => setShowFeaturedOnly(e.target.checked)}
+                            onChange={(e) =>
+                                setShowFeaturedOnly(e.target.checked)
+                            }
                             className="h-4 w-4 rounded border-neutral-300"
                         />
-                        <Label htmlFor="featured-only" className="text-sm font-medium">
+                        <Label
+                            htmlFor="featured-only"
+                            className="text-sm font-medium"
+                        >
                             Active brands only
                         </Label>
                     </div>
@@ -63,7 +77,9 @@ export default function Brands({ brands }: BrandsProps) {
 
                 {filteredBrands.length === 0 ? (
                     <div className="rounded-lg border border-dashed py-12 text-center dark:border-neutral-800">
-                        <p className="text-neutral-600 dark:text-neutral-400">No brands match your search.</p>
+                        <p className="text-neutral-600 dark:text-neutral-400">
+                            No brands match your search.
+                        </p>
                         <Button
                             className="mt-4"
                             variant="outline"
@@ -86,11 +102,20 @@ export default function Brands({ brands }: BrandsProps) {
                                                 {brand.name.slice(0, 2)}
                                             </span>
                                         </div>
-                                        <CardTitle className="text-lg">{brand.name}</CardTitle>
-                                        <CardDescription>{brand.description ?? 'Explore products'}</CardDescription>
+                                        <CardTitle className="text-lg">
+                                            {brand.name}
+                                        </CardTitle>
+                                        <CardDescription>
+                                            {brand.description ??
+                                                'Explore products'}
+                                        </CardDescription>
                                     </CardHeader>
                                     <CardContent className="p-6 pt-0 text-center">
-                                        <Button variant="outline" size="sm" className="w-full">
+                                        <Button
+                                            variant="outline"
+                                            size="sm"
+                                            className="w-full"
+                                        >
                                             View Products
                                         </Button>
                                     </CardContent>

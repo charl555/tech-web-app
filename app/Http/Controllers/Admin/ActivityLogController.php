@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ActivityLog;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ActivityLogController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): \Inertia\Response
     {
         $search = $request->query('search', '');
         $actionFilter = $request->query('action', 'all');

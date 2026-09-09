@@ -7,12 +7,12 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         $period = $request->query('period', 'month');
 
@@ -57,6 +57,6 @@ class ReportController extends Controller
             'topProducts' => $topProducts,
             'topCustomers' => $topCustomers,
             'period' => $period,
-        ]);
+        ])->toResponse($request);
     }
 }

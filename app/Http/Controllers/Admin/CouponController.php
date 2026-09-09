@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Inertia\Inertia;
 
 class CouponController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         $search = $request->query('search', '');
         $statusFilter = $request->query('status', 'all');
@@ -27,15 +28,15 @@ class CouponController extends Controller
                 'search' => $search,
                 'status' => $statusFilter,
             ],
-        ]);
+        ])->toResponse($request);
     }
 
-    public function create()
+    public function create(): Response
     {
-        return Inertia::render('admin/coupons/create');
+        return Inertia::render('admin/coupons/create')->toResponse(request());
     }
 
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         $validated = $request->validate([
             'code' => 'required|string|max:255|unique:coupons',
@@ -58,21 +59,21 @@ class CouponController extends Controller
         return redirect()->route('admin.coupons.index');
     }
 
-    public function edit($id)
+    public function edit(Request $request, int $id): Response
     {
         $coupon = Coupon::findOrFail($id);
 
         return Inertia::render('admin/coupons/edit', [
             'coupon' => $coupon,
-        ]);
+        ])->toResponse($request);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
         $coupon = Coupon::findOrFail($id);
 
         $validated = $request->validate([
-            'code' => 'required|string|max:255|unique:coupons,code,' . $id,
+            'code' => 'required|string|max:255|unique:coupons,code,'.$id,
             'discount_type' => 'required|in:percentage,fixed',
             'discount_value' => 'required|numeric|min:0',
             'min_order_amount' => 'nullable|numeric|min:0',
@@ -90,7 +91,7 @@ class CouponController extends Controller
         return redirect()->route('admin.coupons.index');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
         $coupon = Coupon::findOrFail($id);
         $coupon->delete();

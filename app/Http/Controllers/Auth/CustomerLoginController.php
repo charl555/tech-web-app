@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Laravel\Fortify\Features;
 
 class CustomerLoginController extends Controller
 {
     public function show(Request $request)
     {
         return Inertia::render('public/login', [
-            'canResetPassword' => \Laravel\Fortify\Features::enabled(\Laravel\Fortify\Features::resetPasswords()),
+            'canResetPassword' => Features::enabled(Features::resetPasswords()),
             'status' => $request->session()->get('status'),
         ]);
     }
@@ -25,7 +26,7 @@ class CustomerLoginController extends Controller
             'remember' => 'boolean',
         ]);
 
-        if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
+        if (! Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
             return back()->withErrors([
                 'email' => 'The provided credentials do not match our records.',
             ]);

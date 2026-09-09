@@ -7,11 +7,12 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Inertia\Inertia;
 
 class ProductController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         $products = Product::with(['brand', 'category'])
             ->latest()
@@ -24,10 +25,10 @@ class ProductController extends Controller
             'products' => $products,
             'categories' => $categories,
             'brands' => $brands,
-        ]);
+        ])->toResponse($request);
     }
 
-    public function create()
+    public function create(Request $request): Response
     {
         $categories = Category::where('is_active', true)->get(['id', 'name']);
         $brands = Brand::where('is_active', true)->get(['id', 'name']);
@@ -35,10 +36,10 @@ class ProductController extends Controller
         return Inertia::render('admin/products/create', [
             'categories' => $categories,
             'brands' => $brands,
-        ]);
+        ])->toResponse($request);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -63,7 +64,7 @@ class ProductController extends Controller
         return redirect()->route('admin.products.index');
     }
 
-    public function edit($id)
+    public function edit(Request $request, int $id): Response
     {
         $product = Product::findOrFail($id);
         $categories = Category::where('is_active', true)->get(['id', 'name']);
@@ -73,17 +74,17 @@ class ProductController extends Controller
             'product' => $product,
             'categories' => $categories,
             'brands' => $brands,
-        ]);
+        ])->toResponse($request);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
         $product = Product::findOrFail($id);
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:products,slug,' . $id,
-            'sku' => 'required|string|max:255|unique:products,sku,' . $id,
+            'slug' => 'required|string|max:255|unique:products,slug,'.$id,
+            'sku' => 'required|string|max:255|unique:products,sku,'.$id,
             'description' => 'nullable|string',
             'short_description' => 'nullable|string|max:500',
             'price' => 'required|numeric|min:0',
@@ -103,7 +104,7 @@ class ProductController extends Controller
         return redirect()->route('admin.products.index');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
         $product = Product::findOrFail($id);
         $product->delete();
